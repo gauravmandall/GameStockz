@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Game Stockz</string>
     <string name="login_background">login_background</string>
     <string name="on_boarding5_illustration">on_boarding5_illustration</string>
     <string name="skip">Skip</string>
