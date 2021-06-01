@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameStockz">
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".OnBoardingActivity" />
         <activity android:name=".Dashboard" />
         <activity android:name=".SplashScreenActivity">

@@ -6,7 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
 
 <!--    Theme color of our application  -->
     <color name="blue500">#448AFF</color>
@@ -15,4 +15,10 @@
     <color name="purple500">#E040FB</color>
     <color name="purple800">#6A1B9A</color>
     <color name="yellow500">#FFFF00</color>
+
+<!--    Login page Colors -->
+    <color name="blue_900">#193566</color>
+    <color name="blue_400">#97A7C3</color>
+    <color name="blue_300">#D1D9E6</color>
+    <color name="blue_100">#ECF0F3</color>
 </resources>
