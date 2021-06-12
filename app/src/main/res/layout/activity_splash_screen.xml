@@ -17,15 +17,16 @@
         android:src="@drawable/splash_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/splash_screen_logo" />
 
     <TextView
         android:id="@+id/splashAppName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
-        android:fontFamily="@font/amaticsc_bold"
-        android:text="Game Stockz"
+        android:fontFamily="@font/amatic_sc_bold"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="70sp"
@@ -41,7 +42,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/amarante"
         android:textColor="@color/white"
-        android:text="We Bet you'll love it"
+        android:text="@string/app_slogan"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"

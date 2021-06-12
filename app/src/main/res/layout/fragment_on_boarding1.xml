@@ -21,6 +21,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
         android:text="Game Stockz"
         android:textColor="@color/green500"
         android:textSize="16sp"
@@ -33,16 +34,20 @@
         app:layout_constraintVertical_bias="0.115" />
 
     <TextView
+        android:id="@+id/skip1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip"
+        android:layout_marginEnd="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/poppins"
+        android:text="@string/skip"
+        android:textColor="@color/green500"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/green500"
-        app:layout_constraintHorizontal_bias="1"
-         android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
@@ -52,8 +57,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/amarante"
         android:text="Bored"
-        android:textSize="42sp"
         android:textColor="@color/green500"
+        android:textSize="42sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -83,9 +88,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/pompiere"
         android:text="Let's Jump Into some Cool Stuff"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".1"
@@ -98,14 +105,14 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/tab_indicator1"
-        app:layout_constraintVertical_bias=".6"
-        app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="5dp"
+        android:src="@drawable/tab_indicator1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias=".6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
