@@ -38,6 +38,7 @@ public class OnBoardingActivity extends AppCompatActivity {
 
     }
 
+    @Deprecated
     class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 
 
