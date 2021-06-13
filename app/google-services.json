@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "583734356836",
+    "project_id": "gamestockz",
+    "storage_bucket": "gamestockz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583734356836:android:b9d675f4017768eb29e871",
+        "android_client_info": {
+          "package_name": "com.gamestockz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583734356836-ebiv11srcegjav9rktrh38g041nlrip9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFbPZKryA6idVLK7wEsEdnBGUUSomUPrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583734356836-ebiv11srcegjav9rktrh38g041nlrip9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
