@@ -444,7 +444,7 @@
                     android:layout_marginBottom="30dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:onClick="onSignupClick"
+                    android:onClick="alreadyHaveAccount"
                     android:text="Already Have an Account?"
                     android:textColor="@color/blue500"
                     android:textSize="15sp"
