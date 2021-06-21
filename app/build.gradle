@@ -31,25 +31,31 @@ android {
 }
 
 dependencies {
+
+//    For Firebase
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.1'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-database:20.0.0'
-    ext.kotlin_version = '1.5.10'
+
+//    Inbuilt Implementations & Dependencies
+    testImplementation 'junit:junit:4.13.2'
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.3.0'         //  implementation 'androidx.appcompat:appcompat:1.2.0' depreciated
-    implementation 'com.google.android.material:material:1.3.0'     // Material design Dependency
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.13.2'                     //    testImplementation 'junit:junit:4.+' depreciated
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-//    For Liquid Swipe function
-    implementation 'com.cuberto:liquid-swipe:1.0.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation "androidx.fragment:fragment:1.3.5"
     implementation 'androidx.core:core:1.5.0'
     implementation 'androidx.core:core-ktx:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+//    For Liquid Swipe function
+    implementation 'com.cuberto:liquid-swipe:1.0.0'
+    implementation 'com.google.android.material:material:1.3.0' // Material design Dependency
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
-//  implementation 'com.android.support:design:30.0.0' this dependency is not required yet
+//    For Loading Button Android
+//    implementation 'br.com.simplepass:loading-button-android:2.2.0'    // This Repository is not available for the mavenCentral
+    implementation "androidx.cardview:cardview:1.0.0"
 
 }

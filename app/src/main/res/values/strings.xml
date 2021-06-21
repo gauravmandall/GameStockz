@@ -19,7 +19,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="onboarding4">Ask Queries and Issues and we Reach you within 24hr</string>
     <string name="country_code">+91</string>
-    <string name="resend_otp_again">resend otp again</string>
+    <string name="resendOtp">resend otp</string>
     <string name="app_slogan">We Bet you\'ll love it</string>
     <string name="splash_screen_logo">splash_screen_logo</string>
 </resources>

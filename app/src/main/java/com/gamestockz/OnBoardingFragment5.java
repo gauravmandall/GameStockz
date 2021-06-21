@@ -28,7 +28,7 @@ public class OnBoardingFragment5 extends Fragment {
         fab=root.findViewById(R.id.fab);
 
         fab.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getActivity(), LoginActivity.class);
+            Intent intent1 = new Intent(getActivity(), SignupActivity.class);
             startActivity(intent1);
         });
 

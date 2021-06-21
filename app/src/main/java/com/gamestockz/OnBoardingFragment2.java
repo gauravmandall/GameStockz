@@ -26,7 +26,7 @@ public class OnBoardingFragment2 extends Fragment {
         skip=root.findViewById(R.id.skip2);
 
         skip.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getActivity(), LoginActivity.class);
+            Intent intent1 = new Intent(getActivity(), SignupActivity.class);
             startActivity(intent1);
         });
 

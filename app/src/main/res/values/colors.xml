@@ -28,5 +28,9 @@
     <color name="blue_100">#ECF0F3</color>
     <color name="red_a700">#D50000</color>
 
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#D1D9E6</color>
+    <color name="deep_purple_A200">#7C4DFF</color>
+    <color name="teal_A200">#64FFDA</color>
+    <color name="pink_900">#880E4F</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#0D47A1</color>
 </resources>
