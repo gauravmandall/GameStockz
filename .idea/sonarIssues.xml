@@ -63,6 +63,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/Connection.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/ForgetPasswordActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/LoginActivity.java">
           <value>
             <set />
@@ -168,6 +178,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_forget_password.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
           <value>
             <set />
@@ -233,7 +248,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../wave1/app/src/main/java/com/example/wave/LoginActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../wave1/app/src/main/java/com/example/wave/Register.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../wave1/app/src/main/java/com/example/wave/forgetpassword.java">
           <value>
             <set />
           </value>

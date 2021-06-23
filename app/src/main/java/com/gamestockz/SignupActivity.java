@@ -24,6 +24,7 @@ import com.gamestockz.Modals.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SignupActivity extends AppCompatActivity {
 
-
+    private TextInputLayout nameLt, mobileLt, enterOtpLt, emailLt, passLt, confirmPassLt;
     private TextInputEditText name, mobile, enterOtp, email, pass, confirmPass, refferal;
     private ImageButton getOtp;
     private boolean getotpclicked = false;
@@ -73,6 +74,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void initElements() {
 
+//        For Database and Loading bar
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(SignupActivity.this);
@@ -85,11 +87,20 @@ public class SignupActivity extends AppCompatActivity {
         pd.setMessage("please wait");
 
 
+//        For all Layouts That's Provides Errors
+        nameLt = findViewById(R.id.fullname);
+        mobileLt = findViewById(R.id.forgetMobile);
+        enterOtpLt = findViewById(R.id.enter_otp);
+        emailLt = findViewById(R.id.email);
+        passLt = findViewById(R.id.forgetNewPass);
+        confirmPassLt = findViewById(R.id.confpass);
+
+//        For all Edittexts
         name = findViewById(R.id.fullnameEd);
-        mobile = findViewById(R.id.mobileEd);
+        mobile = findViewById(R.id.loginMobileEd);
         enterOtp = findViewById(R.id.enter_otpEd);
         email = findViewById(R.id.emailEd);
-        pass = findViewById(R.id.passEd);
+        pass = findViewById(R.id.loginPassEd);
         confirmPass = findViewById(R.id.confpassEd);
         refferal = findViewById(R.id.refferalEd);
 
@@ -99,6 +110,34 @@ public class SignupActivity extends AppCompatActivity {
 
         signup = findViewById(R.id.signup);
 
+        /*
+//        Textwatcher for name
+        name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                Check Condition
+                if (!s.toString().isEmpty() && !s.toString().matches("[a-zA-Z]+")){
+                    // When value is not empty and contains a numeric value
+                    // Shows Error
+                    nameLt.setError("Allow only Character");
+                }else {
+                    nameLt.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+*/
+
+//        Listeners
         getOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,25 +221,29 @@ public class SignupActivity extends AppCompatActivity {
 
         try {
             if (name.getText().toString().isEmpty()) {
-                name.setError("Required");
-                pd.dismiss();
+                nameLt.setError("Required*");
+
+            }
+            if (!name.getText().toString().matches("[a-zA-Z]+")) {
+                nameLt.setError("Allow only Characters");
             }
             if (mobile.getText().toString().isEmpty()) {
-                mobile.setError("Required");
-                pd.dismiss();
-
+                mobileLt.setError("Required*");
 
             }
-            if (pass.getText().toString().isEmpty()) {
-                pass.setError("Required");
-                pd.dismiss();
+            if (email.getText().toString().isEmpty()) {
+                emailLt.setError("Required*");
             }
             if (enterOtp.getText().toString().isEmpty()) {
-                enterOtp.setError("Required");
-                pd.dismiss();
+                enterOtpLt.setError("Required*");
+
             }
-            if (pass.getText().toString().length() < 6) {
-                pass.setError("Not Valid");
+            if (pass.getText().toString().isEmpty() || pass.getText().toString().length() < 6) {
+                passLt.setError("Atleast 8 Characters");
+            }
+            if (confirmPass.getText().toString().isEmpty() || confirmPass.getText().toString().equals(pass)) {
+                confirmPassLt.setError("Not valid");
+
             } else {
 
 
@@ -219,17 +262,16 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private void verifySigninCode(){
+    private void verifySigninCode() {
 
-        String code =enterOtp.getText().toString();
+        String code = enterOtp.getText().toString();
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(CodeSent, code);
         signInWithPhoneAuthCredential(credential);
 
 
-
     }
 
-//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -238,27 +280,24 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //                      String id=task.getResult().getUser().getUid();
-                            db=FirebaseDatabase.getInstance().getReference("Users");
-                            Query query=db.orderByChild("mobilenumber").equalTo(mobile.getText().toString());
-
+                            db = FirebaseDatabase.getInstance().getReference("Users");
+                            Query query = db.orderByChild("mobilenumber").equalTo(mobile.getText().toString());
 
 
                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                    if (snapshot.exists()){
+                                    if (snapshot.exists()) {
                                         // Registerdialog.dismiss();
 
                                         Toast.makeText(SignupActivity.this, "Mobile Number already Registered ", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else{
-                                        if (pass.getText().toString().length()<6){
+                                    } else {
+                                        if (pass.getText().toString().length() < 6) {
                                             pass.setError("Password is too short");
-                                        }
-                                        else {
+                                        } else {
                                             Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
-                                                    , refferal.getText().toString(), wallet.toString(),email.getText().toString());
+                                                    , refferal.getText().toString(), wallet.toString(), email.getText().toString());
                                             // String id = task.getResult().getUser().getUid();
                                             database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
                                             Toast.makeText(SignupActivity.this, "Account created Successfully", Toast.LENGTH_SHORT).show();
@@ -270,8 +309,6 @@ public class SignupActivity extends AppCompatActivity {
 
                                         }
                                     }
-
-
 
 
                                 }
@@ -315,13 +352,9 @@ public class SignupActivity extends AppCompatActivity {
                                     });*/
 
 
-
-
-
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
 
 
                                 //problem
@@ -335,7 +368,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 });
     }
-//    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    //    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -356,15 +390,15 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(SignupActivity.this, "Sent", Toast.LENGTH_SHORT).show();
             countDownTimer.setVisibility(View.VISIBLE);
 
-            new CountDownTimer(60000,1000){
+            new CountDownTimer(60000, 1000) {
 
                 @Override
-                public void onTick(long millisUntilFinished){
-                    countDownTimer.setText("" + millisUntilFinished/1000);
+                public void onTick(long millisUntilFinished) {
+                    countDownTimer.setText("" + millisUntilFinished / 1000);
                 }
 
                 @Override
-                public void onFinish(){
+                public void onFinish() {
                     resendOtp.setVisibility(View.VISIBLE);
                     countDownTimer.setVisibility(View.INVISIBLE);
                 }

@@ -14,11 +14,13 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="email">Email</string>
     <string name="conf_pas">Confirm Password</string>
-    <string name="reffer">Refferal Code (optional)</string>
+    <string name="reffer">Refferal Code</string>
     <string name="sign_up">Sign Up</string>
     <string name="onboarding4">Ask Queries and Issues and we Reach you within 24hr</string>
     <string name="country_code">+91</string>
     <string name="resendOtp">resend otp</string>
     <string name="app_slogan">We Bet you\'ll love it</string>
     <string name="splash_screen_logo">splash_screen_logo</string>
+    <string name="new_pass">New Password</string>
+    <string name="conf_new_pass">Confirm Password</string>
 </resources>
