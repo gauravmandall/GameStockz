@@ -1,4 +1,4 @@
-package com.gamestockz;
+package com.gamestockz.Activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -20,7 +20,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.gamestockz.Modals.Users;
+import com.gamestockz.data.modals.Users;
+import com.gamestockz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -373,6 +374,7 @@ public class SignupActivity extends AppCompatActivity {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
+//            This method in No Longer Required
 
         }
 

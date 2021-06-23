@@ -1,4 +1,4 @@
-package com.gamestockz;
+package com.gamestockz.Activities;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gamestockz.Connection;
+import com.gamestockz.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         forgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this,ForgetPasswordActivity.class);
+                Intent intent=new Intent(LoginActivity.this, ForgetPasswordActivity.class);
                 startActivity(intent);
             }
         });

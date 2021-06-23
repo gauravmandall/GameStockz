@@ -1,4 +1,4 @@
-package com.gamestockz.Modals;
+package com.gamestockz.data.modals;
 
 public class Users {
     String name,password, mobilenumber,referralcode,otp,wallet,email;

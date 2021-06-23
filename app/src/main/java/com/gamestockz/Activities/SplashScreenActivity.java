@@ -1,4 +1,4 @@
-package com.gamestockz;
+package com.gamestockz.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.gamestockz.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

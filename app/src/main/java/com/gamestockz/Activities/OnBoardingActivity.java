@@ -1,4 +1,4 @@
-package com.gamestockz;
+package com.gamestockz.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +9,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+
+import com.gamestockz.Fragments.OnBoardingFragment1;
+import com.gamestockz.Fragments.OnBoardingFragment2;
+import com.gamestockz.Fragments.OnBoardingFragment3;
+import com.gamestockz.Fragments.OnBoardingFragment4;
+import com.gamestockz.Fragments.OnBoardingFragment5;
+import com.gamestockz.R;
 
 import org.jetbrains.annotations.NotNull;
 
