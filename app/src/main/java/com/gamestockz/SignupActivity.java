@@ -46,7 +46,6 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputLayout nameLt, mobileLt, enterOtpLt, emailLt, passLt, confirmPassLt;
     private TextInputEditText name, mobile, enterOtp, email, pass, confirmPass, refferal;
     private ImageButton getOtp;
-    private boolean getotpclicked = false;
     private TextView countDownTimer;
     private TextView resendOtp;
     private Button signup;
