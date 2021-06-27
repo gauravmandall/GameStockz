@@ -96,7 +96,7 @@
                     app:layout_constraintWidth_percent=".8"
                     app:prefixText="@string/country_code"
                     app:prefixTextColor="@color/bluea900"
-                    app:startIconDrawable="@drawable/phone"
+                    app:startIconDrawable="@drawable/ic_phone"
                     app:startIconTint="@color/bluea900"
                     tools:ignore="RtlSymmetry">
 
@@ -139,7 +139,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/forgetMobile"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".8"
-                    app:startIconDrawable="@drawable/lock"
+                    app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText

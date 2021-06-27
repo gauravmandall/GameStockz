@@ -1,16 +1,0 @@
-
-n
-java:S2637F"XThis method's return value is marked "androidx.annotation.NonNull" but null is returned.(¥¹ï
-X
-java:S1128"BRemove this unused import 'android.view.animation.AnimationUtils'.(µ¬
-S
-java:S1128"=Remove this unused import 'android.view.animation.Animation'.(õò©²
-v
-java:S1450"[Remove the "pagerAdapter" field and declare it as a local variable in the relevant methods.(ÖÊ±Ëúÿÿÿÿ
-s
-java:S1450"XRemove the "viewPager" field and declare it as a local variable in the relevant methods.(åÙ¬Ïûÿÿÿÿ
-P
-java:S1133*"5Do not forget to remove this deprecated code someday.(¡ûĞÿÿÿÿÿ
-C
-java:S1123*"(Add the missing @deprecated Javadoc tag.(¡ûĞÿÿÿÿÿ
-<	java:S1315""Add a default case to this switch.(¼œóÛüÿÿÿÿ

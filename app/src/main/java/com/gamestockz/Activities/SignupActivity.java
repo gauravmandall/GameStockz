@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.gamestockz.data.modals.Users;
 import com.gamestockz.R;
+import com.gamestockz.data.modals.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
@@ -46,7 +46,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private TextInputLayout nameLt, mobileLt, enterOtpLt, emailLt, passLt, confirmPassLt;
     private TextInputEditText name, mobile, enterOtp, email, pass, confirmPass, refferal;
-    private ImageButton getOtp;
+    private MaterialButton getOtp;
     private TextView countDownTimer;
     private TextView resendOtp;
     private Button signup;

@@ -58,4 +58,12 @@ dependencies {
 //    implementation 'br.com.simplepass:loading-button-android:2.2.0'    // This Repository is not available for the mavenCentral
     implementation "androidx.cardview:cardview:1.0.0"
 
+
+    implementation 'com.etebarian:meow-bottom-navigation:1.2.0'     // For Meow Bottom Navigation Bar
+    implementation 'com.razorpay:checkout:1.6.7'                    // For Razorpay Payment Gateway
+
+
+
+
+
 }

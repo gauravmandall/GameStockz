@@ -95,7 +95,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".8"
-                    app:startIconDrawable="@drawable/person"
+                    app:startIconDrawable="@drawable/ic_person"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -119,10 +119,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/mobile_num"
                     android:textColorHint="@color/bluea900"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginTop="20dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusTopStart="10dp"
@@ -141,7 +141,7 @@
                     app:layout_constraintWidth_percent=".6"
                     app:prefixText="@string/country_code"
                     app:prefixTextColor="@color/bluea900"
-                    app:startIconDrawable="@drawable/phone"
+                    app:startIconDrawable="@drawable/ic_phone"
                     app:startIconTint="@color/bluea900"
                     tools:ignore="RtlSymmetry">
 
@@ -161,27 +161,29 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-                <ImageButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/sendOTP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/get_otp"
-                    android:src="@drawable/otp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/aladin"
+                    android:text="@string/get_otp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="10dp"
                     app:layout_constraintBottom_toTopOf="@+id/enter_otp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.589"
+                    app:layout_constraintHorizontal_bias="0.652"
                     app:layout_constraintStart_toEndOf="@+id/forgetMobile"
                     app:layout_constraintTop_toBottomOf="@+id/fullname"
-                    app:layout_constraintVertical_bias="0.31" />
+                    app:layout_constraintVertical_bias="0.253" />
 
                 <TextView
                     android:id="@+id/resend_otp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="14dp"
+                    android:layout_marginStart="4dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/resendOtp"
@@ -189,12 +191,12 @@
                     android:textColor="@color/pink500"
                     android:textSize="16sp"
                     android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/enter_otp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias=".5"
-                    app:layout_constraintStart_toEndOf="@+id/forgetMobile"
-                    app:layout_constraintTop_toBottomOf="@+id/sendOTP"
-                    app:layout_constraintVertical_bias=".5"
+                    app:layout_constraintBottom_toBottomOf="@+id/enter_otp"
+                    app:layout_constraintEnd_toEndOf="@+id/countdownTimer"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@+id/enter_otp"
+                    app:layout_constraintTop_toBottomOf="@+id/countdownTimer"
+                    app:layout_constraintVertical_bias=".6"
                     tools:ignore="SmallSp" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -202,10 +204,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/enter_otp"
                     android:textColorHint="@color/bluea900"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginTop="20dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusTopStart="10dp"
@@ -223,7 +225,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/forgetMobile"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".6"
-                    app:startIconDrawable="@drawable/notification"
+                    app:startIconDrawable="@drawable/ic_notification"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -246,11 +248,11 @@
                     android:textColor="@color/blue_a200"
                     android:textSize="16sp"
                     android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/enter_otp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/forgetMobile"
+                    app:layout_constraintEnd_toEndOf="@+id/sendOTP"
                     app:layout_constraintHorizontal_bias=".5"
-                    app:layout_constraintStart_toEndOf="@+id/enter_otp"
-                    app:layout_constraintTop_toTopOf="@+id/enter_otp"
+                    app:layout_constraintStart_toStartOf="@+id/sendOTP"
+                    app:layout_constraintTop_toBottomOf="@+id/sendOTP"
                     app:layout_constraintVertical_bias=".5"
                     tools:ignore="HardcodedText" />
 
@@ -260,10 +262,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/email"
                     android:textColorHint="@color/bluea900"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginTop="20dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusTopStart="10dp"
@@ -281,7 +283,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/enter_otp"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".8"
-                    app:startIconDrawable="@drawable/email"
+                    app:startIconDrawable="@drawable/ic_email"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -303,10 +305,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/pass"
                     android:textColorHint="@color/bluea900"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginTop="20dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusTopStart="10dp"
@@ -323,7 +325,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/email"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".8"
-                    app:startIconDrawable="@drawable/lock"
+                    app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -345,9 +347,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/conf_pas"
                     android:textColorHint="@color/bluea900"
-                    android:layout_marginTop="20dp"
                     app:boxCornerRadiusBottomEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -365,7 +367,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/forgetNewPass"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".8"
-                    app:startIconDrawable="@drawable/lock"
+                    app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -387,9 +389,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:hint="@string/reffer"
                     android:textColorHint="@color/bluea900"
-                    android:layout_marginTop="20dp"
                     app:boxCornerRadiusBottomEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -409,7 +411,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/confpass"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintWidth_percent=".8"
-                    app:startIconDrawable="@drawable/refer"
+                    app:startIconDrawable="@drawable/ic_refer"
                     app:startIconTint="@color/bluea900">
 
                     <com.google.android.material.textfield.TextInputEditText

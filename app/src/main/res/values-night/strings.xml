@@ -23,4 +23,6 @@
     <string name="splash_screen_logo">splash_screen_logo</string>
     <string name="new_pass">New Password</string>
     <string name="conf_new_pass">Confirm Password</string>
+    <string name="submit">Submit</string>
+    <string name="enter_amount">Enter Amount</string>
 </resources>

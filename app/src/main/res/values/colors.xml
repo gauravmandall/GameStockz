@@ -11,7 +11,9 @@
 
 <!--    Theme color of our application  -->
     <color name="blue500">#448AFF</color>
+    <color name="indigo_A700">#304FFE</color>
     <color name="green500">#69F0AE</color>
+    <color name="green_A700">#00C853</color>
     <color name="pink500">#FF4081</color>
     <color name="purple500">#E040FB</color>
     <color name="purple800">#6A1B9A</color>
@@ -27,10 +29,16 @@
     <color name="blue_300">#D1D9E6</color>
     <color name="blue_100">#ECF0F3</color>
     <color name="red_a700">#D50000</color>
-
     <color name="deep_purple_A200">#7C4DFF</color>
     <color name="teal_A200">#64FFDA</color>
     <color name="pink_900">#880E4F</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#0D47A1</color>
+
+
+<!--    Colors for Meow Bottom Navigation -->
+    <color name="blue_grey_300">#90A4AE</color>
+
+
+
 </resources>
