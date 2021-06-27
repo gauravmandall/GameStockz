@@ -41,7 +41,7 @@ public class GameSectionFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String a = snapshot.getValue(String.class);
                 time.setText(a);
-                int b = Integer.parseInt(a);
+//                int b = Integer.parseInt(a);
                 // if(b>30){red.setEnabled(true);
                 //  red.setBackgroundColor(R.color.red);
                 // red.setTextColor(R.color.white);}
