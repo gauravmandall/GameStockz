@@ -74,7 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_amount"
-                android:textColorHint="@color/blue_300"
+                android:textColorHint="@color/bluea900"
                 app:hintAnimationEnabled="true"
                 app:boxCornerRadiusBottomEnd="20dp"
                 app:boxCornerRadiusBottomStart="20dp"

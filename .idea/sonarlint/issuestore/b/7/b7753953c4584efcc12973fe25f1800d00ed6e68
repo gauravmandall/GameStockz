@@ -1,0 +1,8 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(áİéüÿÿÿÿ
+C
+java:S1604&"(Make this anonymous inner class a lambda(•£úùÿÿÿÿ
+r
+java:S1450"WRemove the "bnv_Main" field and declare it as a local variable in the relevant methods.(¢™­Òÿÿÿÿÿ
+m	java:S116"SRename this field "bnv_Main" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢™­Òÿÿÿÿÿ
+7	java:S131)""Add a default case to this switch.(ä¦ã¦
