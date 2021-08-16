@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.gamestockz.R;
 import com.gamestockz.data.modals.Users;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -39,7 +40,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SignupActivity extends AppCompatActivity {
@@ -52,6 +57,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button signup;
 
     Integer wallet = 0;
+    private FirebaseFunctions mfunctions;
     private FirebaseAuth mAuth;
     String CodeSent;
     FirebaseDatabase database;
@@ -296,10 +302,12 @@ public class SignupActivity extends AppCompatActivity {
                                         if (pass.getText().toString().length() < 6) {
                                             pass.setError("Password is too short");
                                         } else {
-                                            Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
-                                                    , refferal.getText().toString(), wallet.toString(), email.getText().toString());
+
+                                           // !Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
+                                               //!     , refferal.getText().toString(), wallet.toString(), email.getText().toString());
                                             // String id = task.getResult().getUser().getUid();
-                                            database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
+                                            Task<String> taskData = callcloudfunction();
+                                            //!database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
                                             Toast.makeText(SignupActivity.this, "Account created Successfully", Toast.LENGTH_SHORT).show();
                                             // Registerdialog.dismiss();
                                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
@@ -310,6 +318,30 @@ public class SignupActivity extends AppCompatActivity {
                                         }
                                     }
 
+
+                                }
+
+                                private Task<String> callcloudfunction() {
+                                    FirebaseFunctions mFunctions = FirebaseFunctions.getInstance();
+                                    Map<String, Object> data = new HashMap<>();
+                                    data.put("name",name.getText().toString());
+                                    data.put("pass",pass.getText().toString());
+                                    data.put("mobile",mobile.getText().toString());
+                                    data.put("email",email.getText().toString());
+                                    data.put("referral",refferal.getText().toString());
+                                    data.put("push",true);
+                                    return mFunctions
+                                            .getHttpsCallable("function1")
+                                            .call(data)
+                                            .continueWith(new Continuation<HttpsCallableResult, String>() {
+                                                @Override
+                                                public String then(@NonNull Task<HttpsCallableResult> task) {
+                                                    // This continuation runs on either success or failure, but if the task
+                                                    // has failed then getResult() will throw an Exception which will be
+                                                    // propagated down.
+                                                    return (String) task.getResult().getData().toString();
+                                                }
+                                            });
 
                                 }
 
