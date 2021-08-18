@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gamestockz.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -18,16 +20,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OnRechargeActivity extends AppCompatActivity implements PaymentResultListener {
 
-    TextInputEditText enter_amount;
-    TextInputLayout enter_amountLt;
-    MaterialButton pay, hundred, twoHun, threeHun, fiveHun, sevenHun, thousand, fiveTh, tenTh, fiftyTh;
+    private TextInputEditText enter_amount;
+   private TextInputLayout enter_amountLt;
+   private MaterialButton pay, hundred, twoHun, threeHun, fiveHun, sevenHun, thousand, fiveTh, tenTh, fiftyTh;
     public static String wallet;
     public static String mobile;
 
@@ -39,7 +46,8 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
 
         Intent intent = getIntent();
         mobile = intent.getStringExtra("mobile");
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+        String str=String.valueOf(mobile);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(str).child("wallet");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -196,6 +204,7 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
             checkout.open(activity, options);
 
         } catch (Exception e) {
+            Toast.makeText(OnRechargeActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             // Log.e(TAG, "Error in starting Razorpay Checkout", e);
         }
     }
@@ -203,18 +212,46 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
 
     @Override
     public void onPaymentSuccess(String s) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+       /* DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
         int newwallet = Integer.parseInt(wallet);
         int a = Integer.parseInt(enter_amount.getText().toString());
         newwallet += a;
         String wallet = Integer.toString(newwallet);
-        reference.setValue(wallet);
+        reference.setValue(wallet);**/
+        Task<String> taskData = callcloudfunction();
 
 
         Toast.makeText(this, "Payment Successfull ", Toast.LENGTH_SHORT).show();
 
 
     }
+    private Task<String> callcloudfunction() {
+        FirebaseFunctions mFunctions = FirebaseFunctions.getInstance();
+        Map<String, Object> data = new HashMap<>();
+        data.put("mobile",mobile);
+        data.put("rechargeamt",enter_amount.getText().toString());
+
+        data.put("push",true);
+        return mFunctions
+                .getHttpsCallable("function1")
+                .call(data)
+                .continueWith(new Continuation<HttpsCallableResult, String>() {
+                    @Override
+                    public String then(@NonNull Task<HttpsCallableResult> task) {
+                        // This continuation runs on either success or failure, but if the task
+                        // has failed then getResult() will throw an Exception which will be
+                        // propagated down.
+                        return (String) task.getResult().getData().toString();
+                    }
+                });
+
+    }
+
+
+
+
+
+
 
     @Override
     public void onPaymentError(int i, String s) {
