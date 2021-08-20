@@ -30,7 +30,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="500dp"
         app:layout_constraintHeight_percent=".6"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0" />
 
-            <com.google.android.material.textfield.TextInputLayout
+   <!--         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/enterAmount"
                 style="@style/CustomBoxInputLayoutStyle"
                 android:layout_width="0dp"
@@ -86,7 +86,7 @@
                 app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterTextColor="@color/blue500"
-                app:counterMaxLength="5"
+                app:counterMaxLength="3"
                 app:counterOverflowTextColor="@color/red_a700"
                 app:hintTextColor="@color/pink_A200"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +97,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 android:layout_marginTop="10dp"
                 app:layout_constraintWidth_percent=".8"
-                app:prefixText="@string/country_code"
+                app:prefixText="₹"
                 app:prefixTextColor="@color/bluea900"
                 app:startIconDrawable="@drawable/ic_wallet"
                 app:startIconTint="@color/bluea900"
@@ -107,9 +107,9 @@
                     android:id="@+id/enterAmountEd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:autofillHints="@string/mobile_num"
+                    android:autofillHints="Enter Amount"
                     android:inputType="number"
-                    android:maxLength="7"
+                    android:maxLength="3"
                     android:paddingStart="20dp"
                     android:paddingTop="10dp"
                     android:paddingEnd="20dp"
@@ -118,7 +118,49 @@
                     android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/enterAmount"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_amount"
+                android:textColorHint="@color/bluea900"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeErrorColor="@color/mtrl_error"
+                app:boxStrokeWidth="2dp"
+                app:prefixText="₹"
+                app:prefixTextColor="@color/white"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/bluea900"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/bluea900"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintWidth_percent=".8"
+                app:startIconDrawable="@drawable/ic_wallet"
+                app:startIconTint="@color/bluea900">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterAmountEd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/email"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/bluea900" />
+            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/payBtn"
                 android:layout_width="0dp"
@@ -282,6 +324,7 @@
                 android:elevation="5dp"
                 android:fontFamily="@font/poiret_one"
                 android:text="₹5000"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -306,6 +349,7 @@
                 android:text="₹10000"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:layout_marginBottom="10dp"
                 android:textStyle="bold"
                 android:layout_marginEnd="10dp"
                 app:cornerRadius="20dp"
@@ -325,6 +369,7 @@
                 android:layout_marginEnd="28dp"
                 android:backgroundTint="@color/bluea900"
                 android:elevation="5dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/poiret_one"
                 android:text="₹50000"
                 android:textColor="@color/white"

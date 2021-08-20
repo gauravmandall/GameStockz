@@ -15,16 +15,10 @@ s
 Capp/src/main/java/com/gamestockz/Fragments/BottomGreenFragment.java,c\0\c06d5ede14acbb27cbfb30308177168625997842
 q
 Aapp/src/main/java/com/gamestockz/Fragments/BottomRedFragment.java,8\d\8d5d420c2541b3f48330d5b3b5d4d194b8d0066f
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 n
 >app/src/main/java/com/gamestockz/Fragments/MeeshoFragment.java,a\0\a02975456426ce8e6a31825e58a79f6760722828
-o
-?app/src/main/java/com/gamestockz/Activities/SignupActivity.java,f\8\f83e1adec6f56018a7b04dd41277f24d0ba9cf49
 r
 Bapp/src/main/java/com/gamestockz/Activities/DashboardActivity.java,b\7\b7753953c4584efcc12973fe25f1800d00ed6e68
 s

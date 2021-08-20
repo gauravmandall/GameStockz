@@ -56,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextView resendOtp;
     private Button signup;
 
-    Integer wallet = 0;
+//    Integer wallet = 0;
     private FirebaseFunctions mfunctions;
     private FirebaseAuth mAuth;
     String CodeSent;
@@ -192,13 +192,13 @@ public class SignupActivity extends AppCompatActivity {
 
         if (usersnumber.isEmpty()) {
             mobile.setError("Required");
-            mobile.requestFocus();
+            mobileLt.requestFocus();
             progressDialog.dismiss();
             return;
         }
         if (usersnumber.length() != 10) {
             mobile.setError("Not Valid");
-            mobile.requestFocus();
+            mobileLt.requestFocus();
             progressDialog.dismiss();
             return;
 
