@@ -17,8 +17,6 @@ q
 Aapp/src/main/java/com/gamestockz/Fragments/BottomRedFragment.java,8\d\8d5d420c2541b3f48330d5b3b5d4d194b8d0066f
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-n
->app/src/main/java/com/gamestockz/Fragments/MeeshoFragment.java,a\0\a02975456426ce8e6a31825e58a79f6760722828
 r
 Bapp/src/main/java/com/gamestockz/Activities/DashboardActivity.java,b\7\b7753953c4584efcc12973fe25f1800d00ed6e68
 s

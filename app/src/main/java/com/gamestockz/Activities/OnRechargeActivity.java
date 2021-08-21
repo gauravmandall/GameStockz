@@ -34,7 +34,7 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
 
     private TextInputEditText enter_amount;
    private TextInputLayout enter_amountLt;
-   private MaterialButton pay, hundred, twoHun, threeHun, fiveHun, sevenHun, thousand, fiveTh, tenTh, fiftyTh;
+   private MaterialButton pay;
     public static String wallet;
     public static String mobile;
 
@@ -71,22 +71,25 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
     private void initElements() {
 
         pay = findViewById(R.id.payBtn);
-        enter_amount = findViewById(R.id.enterAmountEd);
-        enter_amountLt = findViewById(R.id.enterAmount);
-        hundred = findViewById(R.id.hundred);
-        twoHun = findViewById(R.id.twoHundred);
-        threeHun = findViewById(R.id.threeHundred);
-        fiveHun = findViewById(R.id.fiveHundred);
-        sevenHun = findViewById(R.id.sevenHundred);
-        thousand = findViewById(R.id.thousand);
-        fiveTh = findViewById(R.id.fiveThousand);
-        tenTh = findViewById(R.id.tenThousand);
-        fiftyTh = findViewById(R.id.fiftyThousand);
+//        enter_amount = findViewById(R.id.enterAmountEd);
+//        enter_amountLt = findViewById(R.id.enterAmount);
+//        hundred = findViewById(R.id.hundred);
+//        twoHun = findViewById(R.id.twoHundred);
+//        threeHun = findViewById(R.id.threeHundred);
+//        fiveHun = findViewById(R.id.fiveHundred);
+//        sevenHun = findViewById(R.id.sevenHundred);
+//        thousand = findViewById(R.id.thousand);
+//        fiveTh = findViewById(R.id.fiveThousand);
+//        tenTh = findViewById(R.id.tenThousand);
+//        fiftyTh = findViewById(R.id.fiftyThousand);
 
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // TODO: Change edittext to subtract money from wallet and redirect to the Razorpay Gateway
+
                 int amount = Integer.parseInt(enter_amount.getText().toString());
 
                 if (amount < 100) {
@@ -103,6 +106,7 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
                 }
             }
         });
+        /*
         hundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +161,7 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
                 enter_amount.setText("50000");
             }
         });
+        */
 
     }
 
@@ -182,6 +187,9 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
          * Pass your payment options to the Razorpay Checkout as a JSONObject
          */
         try {
+
+            //TODO: Change enter_amount to default 100₹
+
             int intamount = Integer.parseInt(enter_amount.getText().toString());
             intamount = intamount * 100;
             String stramount = Integer.toString(intamount);
@@ -226,6 +234,9 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
 
     }
     private Task<String> callcloudfunction() {
+
+        //TODO: Remove enter_amount edittext and add default 100₹ and write in cloud function
+
         FirebaseFunctions mFunctions = FirebaseFunctions.getInstance();
         Map<String, Object> data = new HashMap<>();
         data.put("mobile",mobile);
