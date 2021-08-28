@@ -7,6 +7,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.gamestockz"
         minSdkVersion 23
@@ -62,9 +66,6 @@ dependencies {
 
     implementation 'com.etebarian:meow-bottom-navigation:1.2.0'     // For Meow Bottom Navigation Bar
     implementation 'com.razorpay:checkout:1.6.7'                    // For Razorpay Payment Gateway
-
-
-
 
 
 }

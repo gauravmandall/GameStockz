@@ -1,8 +1,6 @@
 
 H
 app/google-services.json,f\d\fd8d34b142d02ec743a8efefefd2c097961666e9
-\
-,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 @
@@ -17,11 +15,7 @@ q
 Aapp/src/main/java/com/gamestockz/Fragments/BottomRedFragment.java,8\d\8d5d420c2541b3f48330d5b3b5d4d194b8d0066f
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-r
-Bapp/src/main/java/com/gamestockz/Activities/DashboardActivity.java,b\7\b7753953c4584efcc12973fe25f1800d00ed6e68
 s
 Capp/src/main/java/com/gamestockz/Fragments/GameSectionFragment.java,3\1\317c4b26429a58cc131071a8bae4063506c45408
 g
 7app/src/main/java/com/gamestockz/data/modals/Users.java,8\3\83130740aa76ab7430149c0d5b7e5d3f934a58dd
-o
-?app/src/main/java/com/gamestockz/Fragments/ProfileFragment.java,1\e\1e6988e08809aa906c3e4c7a18c708744cb1432c

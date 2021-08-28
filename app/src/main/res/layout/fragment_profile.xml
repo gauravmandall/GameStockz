@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Fragments.ProfileFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -42,6 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/nameShow"
                 android:layout_width="wrap_content"
@@ -58,6 +60,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0" />
+
             <TextView
                 android:id="@+id/walletBal"
                 android:layout_width="wrap_content"
@@ -73,6 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintVertical_bias="0"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
@@ -89,6 +93,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameShow"
                 app:layout_constraintVertical_bias="0"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/balance"
                 android:layout_width="wrap_content"
@@ -104,6 +109,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/nameShow"
                 app:layout_constraintVertical_bias="0" />
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -119,6 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/walletBal"
                 app:layout_constraintVertical_bias="0"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
@@ -134,6 +141,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView11"
                 app:layout_constraintVertical_bias="0"
                 tools:ignore="HardcodedText" />
+
             <TextView
                 android:id="@+id/mobile"
                 android:layout_width="wrap_content"
@@ -158,11 +166,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/teal_A200"
-                app:cornerRadius="20dp"
+                android:elevation="5dp"
                 android:text="Recharge"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:elevation="5dp"
+                app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
                 app:layout_constraintHorizontal_bias="0"
@@ -193,7 +201,7 @@
     <ListView
         android:id="@+id/lstView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintHorizontal_bias=".5"

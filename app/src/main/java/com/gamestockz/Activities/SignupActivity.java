@@ -191,13 +191,13 @@ public class SignupActivity extends AppCompatActivity {
         String phoneNumber = "+91" + mobile.getText().toString();
 
         if (usersnumber.isEmpty()) {
-            mobile.setError("Required");
+            mobileLt.setError("Required");
             mobileLt.requestFocus();
             progressDialog.dismiss();
             return;
         }
         if (usersnumber.length() != 10) {
-            mobile.setError("Not Valid");
+            mobileLt.setError("Not Valid");
             mobileLt.requestFocus();
             progressDialog.dismiss();
             return;
