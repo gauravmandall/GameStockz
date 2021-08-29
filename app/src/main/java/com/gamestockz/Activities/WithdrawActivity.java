@@ -1,6 +1,7 @@
 package com.gamestockz.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,6 +31,10 @@ public class WithdrawActivity extends AppCompatActivity {
     FirebaseFirestore db;
     ProgressDialog progressDialog;
 
+    public static final String MOBILE = "MOBILE";
+    private String getMobile;
+
+
 
 
 
@@ -43,6 +48,12 @@ public class WithdrawActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(WithdrawActivity.this);
         progressDialog.setTitle("Withdrawal process");
         progressDialog.setMessage("We are sending Request");
+
+        Intent intentWithdraw = getIntent();
+        getMobile = intentWithdraw.getStringExtra(MOBILE);
+
+        binding.remainBalance.setText(getMobile);
+
 
 //        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
