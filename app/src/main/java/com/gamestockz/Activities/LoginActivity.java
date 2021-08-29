@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //                         Toast.makeText(LoginActivity.this, ""+passwordfromdb, Toast.LENGTH_SHORT).show();
                         if (passwordfromdb.equals(loginPass.getText().toString())) {
-                            String namefromdb = snapshot.child(loginMobile.getText().toString()).child("name").getValue(String.class);
+                            String namefromdb = snapshot.child(loginMobile.getText().toString()).child("Name").getValue(String.class);
                             String walletfromdb = snapshot.child(loginMobile.getText().toString()).child("wallet").getValue(String.class);
                             String mobilefromdb = snapshot.child(loginMobile.getText().toString()).child("mobilenumber").getValue(String.class);
                             Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
@@ -138,15 +138,17 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("name", namefromdb);
                             intent.putExtra("wallet", walletfromdb);
                             intent.putExtra("mobile", mobilefromdb);
+                            Intent intent1=new Intent(getApplicationContext(),OnRechargeActivity.class);
                             //  Intent intent2=new Intent(getApplicationContext(),SearchFragment.class);
                             //intent2.putExtra("mobile",mobilefromdb);
 
 
-                            intent.putExtra("mobile", mobilefromdb);
+                            //intent.putExtra("mobile", mobilefromdb);
                             startActivity(intent);
                             //startActivity(intent2);
+                            intent1.putExtra("mobile1",mobilefromdb);
 
-                            startActivity(intent);
+                            //startActivity(intent1);
 
                             //Intent intent3=new Intent(LoginActivity.this,MainActivity.class);
                             // startActivity(intent3);

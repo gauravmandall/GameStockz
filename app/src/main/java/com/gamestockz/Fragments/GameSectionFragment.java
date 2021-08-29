@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 public class GameSectionFragment extends Fragment {
 
     MaterialButton red,green;
+    private  TextView walletshow;
 
     TextView period,time;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
@@ -34,22 +35,32 @@ public class GameSectionFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_game_section, container, false);
 
         time=v.findViewById(R.id.time);
+        walletshow=v.findViewById(R.id.walletshow);
         String mobile=getActivity().getIntent().getStringExtra("mobile");
+        // name=intent.getStringExtra("name");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                walletshow.setText(value);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         time1.addValueEventListener(new ValueEventListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String a = snapshot.getValue(String.class);
                 time.setText(a);
-//                int b = Integer.parseInt(a);
-                // if(b>30){red.setEnabled(true);
-                //  red.setBackgroundColor(R.color.red);
-                // red.setTextColor(R.color.white);}
-
-
-                // if (b<30){
-                // red.setEnabled(false);
-                // red.setBackgroundColor(R.color.teal_700);
+//
 
 
             }
