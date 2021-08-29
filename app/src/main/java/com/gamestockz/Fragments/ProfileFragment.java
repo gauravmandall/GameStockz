@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gamestockz.Activities.OnRechargeActivity;
+import com.gamestockz.Activities.WithdrawActivity;
 import com.gamestockz.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
@@ -40,10 +41,13 @@ public class ProfileFragment extends Fragment {
         nameshow = v.findViewById(R.id.nameShow);
         balance = v.findViewById(R.id.balance);
         recharge=v.findViewById(R.id.rechargeBtn);
+        withdraw=v.findViewById(R.id.withdrawBtn);
         listView=v.findViewById(R.id.lstView);
         mobiledb=v.findViewById(R.id.mobile);
         ArrayList<String> arrayList= new ArrayList<>();
         arrayList.add("Profile");
+        arrayList.add("Withdraw Funds");
+        arrayList.add("Show Transaction History");
         arrayList.add("Invite Code");
         arrayList.add("Setting");
         arrayList.add("Logout");
@@ -103,6 +107,16 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WithdrawActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 

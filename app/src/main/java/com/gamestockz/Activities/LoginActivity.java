@@ -141,8 +141,6 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent1=new Intent(getApplicationContext(),OnRechargeActivity.class);
                             //  Intent intent2=new Intent(getApplicationContext(),SearchFragment.class);
                             //intent2.putExtra("mobile",mobilefromdb);
-
-
                             //intent.putExtra("mobile", mobilefromdb);
                             startActivity(intent);
                             //startActivity(intent2);
