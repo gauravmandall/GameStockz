@@ -108,15 +108,15 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setCanceledOnTouchOutside(false);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
             if (loginMobile.getText().toString().isEmpty()) {
-                loginMobile.setError("Required");
+                loginMobileLt.setError("Required");
                 progressDialog.dismiss();
             }
             if (loginPass.getText().toString().isEmpty()) {
-                loginPass.setError("Required");
+                loginPassLt.setError("Required");
                 progressDialog.dismiss();
             }
             if (loginMobile.getText().toString().length() < 10) {
-                loginMobile.setError("Not Valid");
+                loginMobileLt.setError("Not Valid");
                 progressDialog.dismiss();
             }
             Query checkUsers = reference.orderByChild("mobilenumber").equalTo(loginMobile.getText().toString());

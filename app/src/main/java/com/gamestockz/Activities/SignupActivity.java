@@ -56,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextView resendOtp;
     private Button signup;
 
-//    Integer wallet = 0;
+    //    Integer wallet = 0;
     private FirebaseFunctions mfunctions;
     private FirebaseAuth mAuth;
     String CodeSent;
@@ -303,8 +303,8 @@ public class SignupActivity extends AppCompatActivity {
                                             pass.setError("Password is too short");
                                         } else {
 
-                                           // !Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
-                                               //!     , refferal.getText().toString(), wallet.toString(), email.getText().toString());
+                                            // !Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
+                                            //!     , refferal.getText().toString(), wallet.toString(), email.getText().toString());
                                             // String id = task.getResult().getUser().getUid();
                                             Task<String> taskData = callcloudfunction();
                                             //!database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
@@ -324,12 +324,12 @@ public class SignupActivity extends AppCompatActivity {
                                 private Task<String> callcloudfunction() {
                                     FirebaseFunctions mFunctions = FirebaseFunctions.getInstance();
                                     Map<String, Object> data = new HashMap<>();
-                                    data.put("name",name.getText().toString());
-                                    data.put("pass",pass.getText().toString());
-                                    data.put("mobile",mobile.getText().toString());
-                                    data.put("email",email.getText().toString());
-                                    data.put("referral",refferal.getText().toString());
-                                    data.put("push",true);
+                                    data.put("name", name.getText().toString());
+                                    data.put("pass", pass.getText().toString());
+                                    data.put("mobile", mobile.getText().toString());
+                                    data.put("email", email.getText().toString());
+                                    data.put("referral", refferal.getText().toString());
+                                    data.put("push", true);
                                     return mFunctions
                                             .getHttpsCallable("function1")
                                             .call(data)
@@ -359,7 +359,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-                           /* mauth.createUserWithEmailAndPassword("sudhirkumar79823@gmail.com",pass.getText().toString()).
+                           /* mauth.createUserWithEmailAndPassword("example@gmail.com",pass.getText().toString()).
                                     addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {

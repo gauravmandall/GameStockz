@@ -86,6 +86,24 @@
                 app:layout_constraintTop_toTopOf="@+id/abtxt"
                 app:layout_constraintVertical_bias="0" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_history"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/aclonica"
+                android:text="Transaction history"
+                android:textColor="@color/white"
+                android:layout_marginBottom="20dp"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                app:layout_constraintVertical_bias="0" />
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardview"
                 android:layout_width="match_parent"
@@ -289,7 +307,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/AmountWithdraw"
+                        android:id="@+id/amountWithdraw"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -319,7 +337,7 @@
                         app:startIconTint="@color/bluea900">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/AmountWithdrawEd"
+                            android:id="@+id/amountWithdrawEd"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
@@ -348,7 +366,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/AmountWithdraw"
+                        app:layout_constraintTop_toBottomOf="@+id/amountWithdraw"
                         app:layout_constraintWidth_percent=".6" />
 
 
