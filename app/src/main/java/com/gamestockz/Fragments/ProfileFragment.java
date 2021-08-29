@@ -1,6 +1,7 @@
 package com.gamestockz.Fragments;
 
 import android.content.Intent;
+import android.icu.text.Transliterator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,6 @@ public class ProfileFragment extends Fragment {
         listView.setAdapter(arrayAdapter);
 
 
-
         Intent intent=getActivity().getIntent();
         String name=intent.getStringExtra("name");
         String wallet=intent.getStringExtra("wallet");
@@ -89,6 +89,9 @@ public class ProfileFragment extends Fragment {
         withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                String =
+
                 Intent intent = new Intent(getActivity(), WithdrawActivity.class);
                 startActivity(intent);
             }

@@ -9,10 +9,6 @@ F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
-s
-Capp/src/main/java/com/gamestockz/Fragments/BottomGreenFragment.java,c\0\c06d5ede14acbb27cbfb30308177168625997842
-q
-Aapp/src/main/java/com/gamestockz/Fragments/BottomRedFragment.java,8\d\8d5d420c2541b3f48330d5b3b5d4d194b8d0066f
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 s
