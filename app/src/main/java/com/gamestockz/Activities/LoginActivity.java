@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgetPass;
     private Button login;
 
-    private String mobileNum;
 
     BroadcastReceiver broadcastReceiver;
     ProgressDialog progressDialog;
