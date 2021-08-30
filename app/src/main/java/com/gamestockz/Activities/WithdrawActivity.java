@@ -2,10 +2,13 @@ package com.gamestockz.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import com.gamestockz.databinding.ActivityWithdrawBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,41 +32,36 @@ import java.util.Map;
 public class WithdrawActivity extends AppCompatActivity {
 
     ActivityWithdrawBinding binding;
-    FirebaseFirestore db;
     ProgressDialog progressDialog;
-
-
-
-
-
+    private FirebaseFirestore firebaseFirestore;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        String mobile=getIntent().getStringExtra("mobilewithdraw");
+
+        String availBal = getIntent().getStringExtra("walletWithdraw");
+        binding.remainBalance.setText(availBal);
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
 
         progressDialog = new ProgressDialog(WithdrawActivity.this);
         progressDialog.setTitle("Withdrawal process");
         progressDialog.setMessage("We are sending Request");
 
-
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
-
         binding.withdrawFundsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 withdrawOnClick();
             }
         });
 
-
     }
 
     private void withdrawOnClick() {
-
 
         try {
             if (binding.realNameEd.getText().toString().isEmpty()) {
@@ -102,8 +101,6 @@ public class WithdrawActivity extends AppCompatActivity {
 //            }
             else {
 
-
-                // Registerdialog.show();
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
 
@@ -117,7 +114,8 @@ public class WithdrawActivity extends AppCompatActivity {
     }
 
     private void withdrawVerify() {
-        db = FirebaseFirestore.getInstance();
+        String mobile = getIntent().getStringExtra("mobilewithdraw");
+
         String RealName = binding.realNameEd.getText().toString();
         String AccountNumber = binding.accountNumEd.getText().toString();
         String ConfirmAccountNumber = binding.cfmAccountNumEd.getText().toString();
@@ -126,31 +124,32 @@ public class WithdrawActivity extends AppCompatActivity {
         String Status = "Pending";
 
 
-        Map<String, Object> WithdrawRequests = new HashMap<>();
-        WithdrawRequests.put("Real Name", RealName);
-        WithdrawRequests.put("Account Number", AccountNumber);
-        WithdrawRequests.put("Confirm Account Number", ConfirmAccountNumber);
-        WithdrawRequests.put("Ifsc Code", Ifsc);
-        WithdrawRequests.put("Amount", Amount);
-        WithdrawRequests.put("Status", Status);
+        DocumentReference documentReference = firebaseFirestore.collection("Withdraw Requests").document(mobile);
 
-        db.collection("Withdraw Requests")
-                .add(WithdrawRequests)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
+        Map<String, Object> withdrawRequests = new HashMap<>();
+        withdrawRequests.put("Real Name", RealName);
+        withdrawRequests.put("Account Number", AccountNumber);
+        withdrawRequests.put("Confirm Account Number", ConfirmAccountNumber);
+        withdrawRequests.put("Ifsc Code", Ifsc);
+        withdrawRequests.put("Amount", Amount);
+        withdrawRequests.put("Status", Status);
 
-                        Toast.makeText(WithdrawActivity.this, "Withdraw Request Proceed", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        documentReference.set(withdrawRequests).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                Toast.makeText(WithdrawActivity.this, "Withdraw Request Proceed", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(WithdrawActivity.this, "Withdraw Request Failed", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
+
     }
 
 }
-
-//.document("mobile")
