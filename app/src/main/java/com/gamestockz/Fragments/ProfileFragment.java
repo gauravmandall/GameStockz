@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -44,6 +46,7 @@ public class ProfileFragment extends Fragment {
         withdraw=v.findViewById(R.id.withdrawBtn);
         listView=v.findViewById(R.id.lstView);
         mobiledb=v.findViewById(R.id.mobile);
+        withdraw=v.findViewById(R.id.withdrawBtn);
         ArrayList<String> arrayList= new ArrayList<>();
         arrayList.add("Profile");
         arrayList.add("Withdraw Funds");
@@ -79,6 +82,13 @@ public class ProfileFragment extends Fragment {
         nameshow.setText(name);
         balance.setText(wallet);
         mobiledb.setText(mobile);
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4=new Intent(getActivity(), WithdrawActivity.class);
+                startActivity(intent4);
+            }
+        });
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");
@@ -112,7 +122,15 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), WithdrawActivity.class);
+                intent.putExtra("mobilewithdraw",mobile);
                 startActivity(intent);
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
+
             }
         });
 

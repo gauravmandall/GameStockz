@@ -41,6 +41,8 @@ public class WithdrawActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        String mobile=getIntent().getStringExtra("mobilewithdraw");
+
 
         progressDialog = new ProgressDialog(WithdrawActivity.this);
         progressDialog.setTitle("Withdrawal process");
