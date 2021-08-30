@@ -141,7 +141,6 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("wallet", walletfromdb);
                             intent.putExtra("mobile", mobilefromdb);
                             Intent intent1=new Intent(getApplicationContext(),OnRechargeActivity.class);
-                            sendData();
 
                             //  Intent intent2=new Intent(getApplicationContext(),SearchFragment.class);
                             //intent2.putExtra("mobile",mobilefromdb);
@@ -201,13 +200,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void sendData(){
-        mobileNum = loginMobile.getText().toString().trim();
-
-        Intent intentWithdraw = new Intent(LoginActivity.this, WithdrawActivity.class);
-        intentWithdraw.putExtra(WithdrawActivity.MOBILE,mobileNum);
-        startActivity(intentWithdraw);
-    }
 
     protected void registernetwork() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
