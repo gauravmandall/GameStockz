@@ -64,11 +64,6 @@ public class WithdrawActivity extends AppCompatActivity {
         binding.remainBalance.setText(availBal);
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        currentDateandTime = simpleDateFormat.format(new Date());
-
-//        enterAmount = binding.amountWithdrawEd.getText().toString();
-
 
         progressDialog = new ProgressDialog(WithdrawActivity.this);
         progressDialog.setTitle("Withdrawal process");
@@ -180,6 +175,10 @@ public class WithdrawActivity extends AppCompatActivity {
     }
 
     private void withdrawVerify() {
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        currentDateandTime = simpleDateFormat.format(new Date());
+
         String mobile = getIntent().getStringExtra("mobilewithdraw");
 
         String RealName = binding.realNameEd.getText().toString();
