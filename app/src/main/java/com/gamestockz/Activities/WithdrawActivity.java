@@ -21,8 +21,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,7 +44,11 @@ public class WithdrawActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     String currentDateandTime;
 
-//    String enterAmount;
+    public static String wallet;
+    //    public static String mobile;
+    String s;
+
+
     int fenterAmount;
     String availBal;
 
@@ -63,7 +70,6 @@ public class WithdrawActivity extends AppCompatActivity {
 //        enterAmount = binding.amountWithdrawEd.getText().toString();
 
 
-
         progressDialog = new ProgressDialog(WithdrawActivity.this);
         progressDialog.setTitle("Withdrawal process");
         progressDialog.setMessage("We are sending Request");
@@ -75,7 +81,27 @@ public class WithdrawActivity extends AppCompatActivity {
                 withdrawOnClick();
             }
         });
+        sendDataToRealTimeDatabase();
 
+
+    }
+
+    private void sendDataToRealTimeDatabase() {
+        String mobile = getIntent().getStringExtra("mobilewithdraw");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                wallet = snapshot.getValue(String.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void withdrawOnClick() {
@@ -128,21 +154,21 @@ public class WithdrawActivity extends AppCompatActivity {
                 binding.amountWithdraw.setError("Required*");
                 binding.amountWithdraw.requestFocus();
                 return;
-            } if (fenterAmount > favailBal){
+            }
+            if (fenterAmount > favailBal) {
                 binding.amountWithdraw.setError("Insufficient Funds");
                 binding.amountWithdraw.requestFocus();
                 return;
-            } if (fenterAmount < 31){
-                binding.amountWithdraw.setError("1. Minimum Withdraw is Rs.31 \n2. Withdraw Charges:\ni)less than 1500\nCharges-Rs.30\nii)Greater than 1500\nCharges-Rs.2%\n3. Withdraw Timing:\ni)Monday to Saturday\nii)10 AM to 5 PM\n");
             }
-
-            else {
+            if (fenterAmount < 31) {
+                binding.amountWithdraw.setError("1. Minimum Withdraw is Rs.31 \n2. Withdraw Charges:\ni)less than 1500\nCharges-Rs.30\nii)Greater than 1500\nCharges-Rs.2%\n3. Withdraw Timing:\ni)Monday to Saturday\nii)10 AM to 5 PM\n");
+            } else {
 
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
 
                 int fremainBal = favailBal - fenterAmount;
-                String s = String.valueOf(fremainBal);
+                s = String.valueOf(fremainBal);
                 binding.remainBalance.setText(s);
 
                 withdrawVerify();
@@ -178,6 +204,9 @@ public class WithdrawActivity extends AppCompatActivity {
         documentReference.set(withdrawRequests).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+                reference.setValue(s);
 
                 Toast.makeText(WithdrawActivity.this, "Withdraw Request Proceed", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();

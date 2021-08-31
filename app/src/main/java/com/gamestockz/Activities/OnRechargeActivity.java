@@ -124,7 +124,6 @@ public class OnRechargeActivity extends AppCompatActivity implements PaymentResu
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
             options.put("amount", stramount);//pass amount in currency subunits
-            // options.put("prefill.email", "gaurav.kumar@example.com");
             options.put("prefill.contact",mobile);
             JSONObject retryObj = new JSONObject();
             retryObj.put("enabled", true);
