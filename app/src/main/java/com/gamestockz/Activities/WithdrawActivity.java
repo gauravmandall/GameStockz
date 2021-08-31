@@ -26,7 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class WithdrawActivity extends AppCompatActivity {
@@ -35,6 +38,14 @@ public class WithdrawActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private FirebaseFirestore firebaseFirestore;
 
+    SimpleDateFormat simpleDateFormat;
+    String currentDateandTime;
+
+//    String enterAmount;
+    int fenterAmount;
+    String availBal;
+
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +53,15 @@ public class WithdrawActivity extends AppCompatActivity {
         binding = ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String availBal = getIntent().getStringExtra("walletWithdraw");
+        availBal = getIntent().getStringExtra("walletWithdraw");
         binding.remainBalance.setText(availBal);
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        currentDateandTime = simpleDateFormat.format(new Date());
+
+//        enterAmount = binding.amountWithdrawEd.getText().toString();
+
 
 
         progressDialog = new ProgressDialog(WithdrawActivity.this);
@@ -63,47 +80,70 @@ public class WithdrawActivity extends AppCompatActivity {
 
     private void withdrawOnClick() {
 
+        binding.realName.setError(null);
+        binding.accountNum.setError(null);
+        binding.cfmAccountNum.setError(null);
+        binding.ifsc.setError(null);
+        binding.amountWithdraw.setError(null);
+
+        fenterAmount = Integer.parseInt(binding.amountWithdrawEd.getText().toString());
+        int favailBal = Integer.parseInt(availBal);
+
         try {
             if (binding.realNameEd.getText().toString().isEmpty()) {
                 binding.realName.setError("Required*");
+                binding.realName.requestFocus();
                 return;
 
             }
-            if (!binding.realNameEd.getText().toString().matches("[a-zA-Z]+")) {
+            if (!binding.realNameEd.getText().toString().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$")) {
                 binding.realName.setError("Allow only Characters");
+                binding.realName.requestFocus();
                 return;
             }
             if (binding.accountNumEd.getText().toString().isEmpty()) {
                 binding.accountNum.setError("Required*");
+                binding.accountNum.requestFocus();
                 return;
 
             }
             if (binding.cfmAccountNumEd.getText().toString().isEmpty()) {
                 binding.cfmAccountNum.setError("Required*");
+                binding.cfmAccountNum.requestFocus();
                 return;
             }
             if (binding.ifscEd.getText().toString().isEmpty()) {
                 binding.ifsc.setError("Required*");
+                binding.ifsc.requestFocus();
                 return;
             }
             if (!binding.accountNumEd.getText().toString().equals(binding.cfmAccountNumEd.getText().toString())) {
                 binding.accountNum.setError("Account number mismatched");
                 binding.cfmAccountNum.setError("Account number mismatched");
+                binding.cfmAccountNum.requestFocus();
                 return;
 
             }
             if (binding.amountWithdrawEd.getText().toString().isEmpty()) {
                 binding.amountWithdraw.setError("Required*");
+                binding.amountWithdraw.requestFocus();
                 return;
+            } if (fenterAmount > favailBal){
+                binding.amountWithdraw.setError("Insufficient Funds");
+                binding.amountWithdraw.requestFocus();
+                return;
+            } if (fenterAmount < 31){
+                binding.amountWithdraw.setError("1. Minimum Withdraw is Rs.31 \n2. Withdraw Charges:\ni)less than 1500\nCharges-Rs.30\nii)Greater than 1500\nCharges-Rs.2%\n3. Withdraw Timing:\ni)Monday to Saturday\nii)10 AM to 5 PM\n");
             }
-//            if (binding.amountWithdrawEd.getText().toString().length() > ) {
 
-//            }
             else {
 
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
 
+                int fremainBal = favailBal - fenterAmount;
+                String s = String.valueOf(fremainBal);
+                binding.remainBalance.setText(s);
 
                 withdrawVerify();
             }
@@ -124,7 +164,8 @@ public class WithdrawActivity extends AppCompatActivity {
         String Status = "Pending";
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("Withdraw Requests").document(mobile);
+        DocumentReference documentReference = firebaseFirestore.collection("Withdraw Requests").document(mobile)
+                .collection("Requests").document(currentDateandTime);
 
         Map<String, Object> withdrawRequests = new HashMap<>();
         withdrawRequests.put("Real Name", RealName);
