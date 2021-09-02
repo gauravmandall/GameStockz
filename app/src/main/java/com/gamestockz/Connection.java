@@ -14,7 +14,7 @@ public class Connection  extends BroadcastReceiver {
             Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(context, "Not Connected ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No Internet!", Toast.LENGTH_SHORT).show();
         }
 
     }
