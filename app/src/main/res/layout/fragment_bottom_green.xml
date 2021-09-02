@@ -82,6 +82,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/subtractGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="75dp"
                 android:layout_marginEnd="30dp"
@@ -91,6 +92,7 @@
                 android:textSize="30dp" />
 
             <TextView
+                android:id="@+id/quantityGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -99,6 +101,7 @@
                 android:textSize="60sp" />
 
             <Button
+                android:id="@+id/addGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="75dp"
                 android:layout_marginStart="30dp"
@@ -124,7 +127,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/price_text_view"
+                android:id="@+id/totalPriceMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -135,6 +138,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/joinGreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
