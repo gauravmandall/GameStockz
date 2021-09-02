@@ -52,13 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initElements();
         registernetwork();
+        loginMobile.setError(null);
+        loginPass.setError(null);
+
 
     }
 
     private void initElements() {
-
-        loginMobile.setError(null);
-        loginPass.setError(null);
 
         broadcastReceiver = new Connection();
         mauth = FirebaseAuth.getInstance();
@@ -104,9 +104,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginOnClick() {
+
         try {
-
-
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");

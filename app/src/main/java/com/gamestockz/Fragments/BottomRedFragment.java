@@ -5,26 +5,50 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.gamestockz.R;
+import com.gamestockz.databinding.FragmentBottomRedBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class BottomRedFragment extends BottomSheetDialogFragment {
 
-    Button tenred,fiftyred,hundredred;
+    FragmentBottomRedBinding binding;
+
+    //    Button tenred,fiftyred,hundredred;
     FirebaseDatabase database;
     DatabaseReference myref;
     DatabaseReference price;
 
+    int quantity = 0;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_bottom_red, container, false);
-        String mobile=getActivity().getIntent().getStringExtra("mobile");
 
-        return v;
+        binding = FragmentBottomRedBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        binding.subtractRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                decrement();
+
+            }
+        });
+
+
+        return view;
     }
+
+    private void decrement() {
+
+        quantity = quantity - 1;
+        binding.subtractRed.setText(" " + quantity);
+    }
+
 }

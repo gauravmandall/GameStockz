@@ -11,7 +11,5 @@ X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-s
-Capp/src/main/java/com/gamestockz/Fragments/GameSectionFragment.java,3\1\317c4b26429a58cc131071a8bae4063506c45408
 g
 7app/src/main/java/com/gamestockz/data/modals/Users.java,8\3\83130740aa76ab7430149c0d5b7e5d3f934a58dd
