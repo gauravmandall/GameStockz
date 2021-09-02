@@ -315,6 +315,9 @@ public class SignupActivity extends AppCompatActivity {
                                             // !Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
                                             //!     , refferal.getText().toString(), wallet.toString(), email.getText().toString());
                                             // String id = task.getResult().getUser().getUid();
+
+
+
                                             Task<String> taskData = callcloudfunction();
                                             //!database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
                                             Toast.makeText(SignupActivity.this, "Account created Successfully", Toast.LENGTH_SHORT).show();
@@ -337,7 +340,14 @@ public class SignupActivity extends AppCompatActivity {
                                     data.put("pass", pass.getText().toString());
                                     data.put("mobile", mobile.getText().toString());
                                     data.put("email", email.getText().toString());
-                                    data.put("referral", refferal.getText().toString());
+
+                                    String refmobile=mobile.getText().toString().substring(5,10);
+
+                                    String b=name.getText().toString();
+                                    String myreferralco=b.concat(refmobile);
+
+                                    data.put("referral",myreferralco);
+                                    data.put("promotioncode",refferal.getText().toString());
                                     data.put("push", true);
                                     return mFunctions
                                             .getHttpsCallable("function1")
@@ -368,29 +378,6 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-                           /* mauth.createUserWithEmailAndPassword("example@gmail.com",pass.getText().toString()).
-                                    addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            //  Toast.makeText(Register.this, "email", Toast.LENGTH_SHORT).show();
-                                            if (task.isSuccessful()) {
-
-
-                                                Users users = new Users(name.getText().toString(), pass.getText().toString(), phone.getText().toString()
-                                                        , refer.getText().toString(), wallet.toString());
-                                                String id = task.getResult().getUser().getUid();
-                                                database.getReference().child("Users").child(id).setValue(users);
-                                                Toast.makeText(Register.this, "Account created Successfully", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(Register.this, LoginActivity.class);
-                                                startActivity(intent);
-                                            }
-                                            else {
-                                                Toast.makeText(Register.this, "Mobile Number already in use", Toast.LENGTH_SHORT).show();
-                                            }
-
-
-                                        }
-                                    });*/
 
 
                         } else {
