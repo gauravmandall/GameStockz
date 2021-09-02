@@ -116,6 +116,15 @@ public class SignupActivity extends AppCompatActivity {
 
         signup = findViewById(R.id.signup);
 
+        name.setError(null);
+        mobile.setError(null);
+        enterOtp.setError(null);
+        email.setError(null);
+        pass.setError(null);
+        confirmPass.setError(null);
+        refferal.setError(null);
+
+
         /*
 //        Textwatcher for name
         name.addTextChangedListener(new TextWatcher() {

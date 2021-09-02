@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initElements() {
 
+        loginMobile.setError(null);
+        loginPass.setError(null);
 
         broadcastReceiver = new Connection();
         mauth = FirebaseAuth.getInstance();

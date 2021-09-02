@@ -210,6 +210,7 @@ public class WithdrawActivity extends AppCompatActivity {
                 Toast.makeText(WithdrawActivity.this, "Withdraw Request Proceed", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
