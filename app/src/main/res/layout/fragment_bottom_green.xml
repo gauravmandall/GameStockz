@@ -154,6 +154,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/black"
             android:fontFamily="@font/poppins"
             android:text="By clicking JOIN Button you \n agree to our presale rule"
             android:textSize="16sp"

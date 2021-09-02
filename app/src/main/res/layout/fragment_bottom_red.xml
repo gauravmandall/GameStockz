@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="1"
+                android:text="0"
                 android:textColor="@color/black"
                 android:textSize="60sp" />
 
@@ -124,7 +124,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/price_text_view"
+                android:id="@+id/totalPriceMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -135,6 +135,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/joinRed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -154,6 +155,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="30dp"
             android:fontFamily="@font/poppins"
             android:text="By clicking JOIN Button you \n agree to our presale rule"
             android:textSize="16sp"
