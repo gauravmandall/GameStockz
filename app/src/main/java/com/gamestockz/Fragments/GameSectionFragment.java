@@ -1,6 +1,7 @@
 package com.gamestockz.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,12 @@ public class GameSectionFragment extends Fragment {
         walletshow=v.findViewById(R.id.walletshow);
         String mobile=getActivity().getIntent().getStringExtra("mobile");
         // name=intent.getStringExtra("name");
+        Bundle bundle=new Bundle();
+        bundle.putString("mobilere",mobile);
+        BottomRedFragment fragment=new BottomRedFragment();
+        fragment.setArguments(bundle);
+       // getChildFragmentManager().beginTransaction().replace(R.id.content,fragment).commit();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");
         myRef.addValueEventListener(new ValueEventListener() {

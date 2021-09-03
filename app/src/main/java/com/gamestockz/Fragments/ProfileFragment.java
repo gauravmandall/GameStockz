@@ -167,6 +167,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), "" + id, Toast.LENGTH_SHORT).show();
+                if(id==5){
+                    Intent intentlog=new Intent(getContext(),LoginActivity.class);
+                    startActivity(intentlog);
+                }
 
             }
         });

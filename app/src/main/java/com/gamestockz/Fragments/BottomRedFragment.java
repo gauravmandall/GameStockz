@@ -1,6 +1,7 @@
 package com.gamestockz.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,9 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         View view = binding.getRoot();
         String qty = String.valueOf(quantity);
         binding.quantityRed.setText(qty);
+       //Intent mobilered=getActivity().
+        String a=getArguments().getString("mobilere");
+        Toast.makeText(getContext(), ""+a, Toast.LENGTH_SHORT).show();
         quantityRed = Integer.parseInt(binding.quantityRed.getText().toString());
 
         progressDialog = new ProgressDialog(getActivity());
