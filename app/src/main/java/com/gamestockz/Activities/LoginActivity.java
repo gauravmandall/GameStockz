@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.gamestockz.Connection;
+import com.gamestockz.Fragments.BottomRedFragment;
 import com.gamestockz.R;
+import com.gamestockz.databinding.FragmentBottomGreenBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -136,6 +139,9 @@ public class LoginActivity extends AppCompatActivity {
                             String mobilefromdb = snapshot.child(loginMobile.getText().toString()).child("mobilenumber").getValue(String.class);
                             Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
+
+
+
                             Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
                             intent.putExtra("name", namefromdb);
                             intent.putExtra("wallet", walletfromdb);
@@ -148,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             //startActivity(intent2);
                             intent1.putExtra("mobile1",mobilefromdb);
+
 
                             //startActivity(intent1);
 

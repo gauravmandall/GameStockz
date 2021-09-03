@@ -39,11 +39,11 @@ public class GameSectionFragment extends Fragment {
         walletshow=v.findViewById(R.id.walletshow);
         String mobile=getActivity().getIntent().getStringExtra("mobile");
         // name=intent.getStringExtra("name");
-        Bundle bundle=new Bundle();
-        bundle.putString("mobilere",mobile);
-        BottomRedFragment fragment=new BottomRedFragment();
-        fragment.setArguments(bundle);
-       // getChildFragmentManager().beginTransaction().replace(R.id.content,fragment).commit();
+        //Bundle bundle=new Bundle();
+        //bundle.putString("mobilere",mobile);
+        //BottomRedFragment fragment=new BottomRedFragment();
+        //fragment.setArguments(bundle);
+       //getChildFragmentManager().beginTransaction().replace(R.id.,fragment).commit();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");

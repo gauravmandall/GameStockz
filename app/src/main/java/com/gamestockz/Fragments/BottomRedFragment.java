@@ -42,8 +42,13 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         String qty = String.valueOf(quantity);
         binding.quantityRed.setText(qty);
        //Intent mobilered=getActivity().
-        String a=getArguments().getString("mobilere");
-        Toast.makeText(getContext(), ""+a, Toast.LENGTH_SHORT).show();
+        //String a=this.getArguments().getString("mobilere");
+        //Bundle args=getArguments();
+       String intentmobile=getActivity().getIntent().getStringExtra("mobile");
+        Toast.makeText(getContext(), intentmobile, Toast.LENGTH_SHORT).show();
+
+
+
         quantityRed = Integer.parseInt(binding.quantityRed.getText().toString());
 
         progressDialog = new ProgressDialog(getActivity());
