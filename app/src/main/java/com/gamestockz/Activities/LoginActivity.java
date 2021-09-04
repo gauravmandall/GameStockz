@@ -55,9 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initElements();
         registernetwork();
-        loginMobile.setError(null);
-        loginPass.setError(null);
-
 
     }
 
@@ -107,6 +104,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginOnClick() {
+
+//        loginMobileLt.setError(null);
+//        loginPassLt.setError(null);
 
         try {
             progressDialog.show();

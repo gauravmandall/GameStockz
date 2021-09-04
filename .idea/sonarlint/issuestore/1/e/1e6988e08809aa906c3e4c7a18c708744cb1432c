@@ -1,0 +1,23 @@
+
+Q
+java:S3740L"/Provide the parametrized type for this generic.(ıíùÓÿÿÿÿÿ8ëµƒÒº/
+Q
+java:S3740L"/Provide the parametrized type for this generic.(ıíùÓÿÿÿÿÿ8ìµƒÒº/
+H
+java:S1659""&Declare "withdraw" on a separate line.(İ§Œûÿÿÿÿ8ÿµƒÒº/
+A
+java:S1659#"%Declare "balance" on a separate line.(Ğš8ÿµƒÒº/
+]	java:S125T"<This block of commented-out lines of code should be removed.(è•‡ğÿÿÿÿÿ8—¶ƒÒº/
+X	java:S125X"<This block of commented-out lines of code should be removed.(öœ§É8™¶ƒÒº/
+
+java:S1186j"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ô°¤¦8š¶ƒÒº/
+]	java:S125o"<This block of commented-out lines of code should be removed.(‹¨¸üÿÿÿÿ8¶ƒÒº/
+J
+java:S1604p"(Make this anonymous inner class a lambda(ıÂ´ïÿÿÿÿÿ8²¶ƒÒº/
+K
+java:S1604„"(Make this anonymous inner class a lambda(¸«ÖËşÿÿÿÿ8³¶ƒÒº/
+E
+java:S1604{"(Make this anonymous inner class a lambda(÷æ¬Ì8³¶ƒÒº/
+E
+java:S1604¦"(Make this anonymous inner class a lambda(•ÁñS8³¶ƒÒº/
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(äßßZ8¶¶ƒÒº/
