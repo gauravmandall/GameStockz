@@ -6,28 +6,36 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.gamestockz.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class GameSectionFragment extends Fragment {
 
     MaterialButton red,green;
     private  TextView walletshow;
+    ListView listview;
 
     TextView period,time;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference time1=database.getReference("Time").child("Time");
     DatabaseReference period1=database.getReference("period");
+    DatabaseReference result;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,14 +44,12 @@ public class GameSectionFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_game_section, container, false);
 
         time=v.findViewById(R.id.time);
+        listview=v.findViewById(R.id.listview);
         walletshow=v.findViewById(R.id.walletshow);
         String mobile=getActivity().getIntent().getStringExtra("mobile");
-        // name=intent.getStringExtra("name");
-        //Bundle bundle=new Bundle();
-        //bundle.putString("mobilere",mobile);
-        //BottomRedFragment fragment=new BottomRedFragment();
-        //fragment.setArguments(bundle);
-       //getChildFragmentManager().beginTransaction().replace(R.id.,fragment).commit();
+        ArrayList<String> arrayList=new ArrayList<>();
+
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");
@@ -115,7 +121,39 @@ public class GameSectionFragment extends Fragment {
                 bottomGreenFragment.show(getChildFragmentManager(),bottomGreenFragment.getTag());
             }
         });
+       
+        ArrayAdapter<String> myArrayadap=new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1,arrayList);
+        result=FirebaseDatabase.getInstance().getReference("Result");
+        listview.setAdapter(myArrayadap);
+        result.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String value=snapshot.getValue(String.class);
+                arrayList.add(value);
+                myArrayadap.notifyDataSetChanged();
 
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            myArrayadap.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return v;
     }
 }

@@ -25,7 +25,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="133dp">
 
             <TextView
                 android:id="@+id/walletBal"
@@ -44,11 +44,11 @@
                 app:layout_constraintVertical_bias="0" />
 
             <TextView
+                android:id="@+id/walletshow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:id="@+id/walletshow"
                 android:text=""
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -98,12 +98,12 @@
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_refresh"
                 app:iconTint="@color/white"
-                app:layout_constraintVertical_bias=".5"
-                app:layout_constraintHorizontal_bias=".5"
                 app:layout_constraintBottom_toBottomOf="@+id/readRuleBtn"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".5"
                 app:layout_constraintStart_toEndOf="@+id/readRuleBtn"
-                app:layout_constraintTop_toTopOf="@+id/readRuleBtn" />
+                app:layout_constraintTop_toTopOf="@+id/readRuleBtn"
+                app:layout_constraintVertical_bias=".5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -288,7 +288,8 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/listview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
