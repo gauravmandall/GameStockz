@@ -10,13 +10,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.gamestockz.Activities.WithdrawActivity;
 import com.gamestockz.R;
 import com.gamestockz.databinding.FragmentBottomRedBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.SplittableRandom;
 
@@ -25,14 +30,17 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     FragmentBottomRedBinding binding;
     ProgressDialog progressDialog;
 
-    FirebaseDatabase database;
-    DatabaseReference myref;
-    DatabaseReference price;
+//    FirebaseDatabase firebaseDatabase;
+//    DatabaseReference databaseReference;
+//    DatabaseReference price;
 
-    int quantity = 0;
+    int quantity = 1;
     int quantityRed;
     String coin;
     int icoin;
+    String mobile;
+
+
 
 
     @Override
@@ -41,15 +49,15 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         View view = binding.getRoot();
         String qty = String.valueOf(quantity);
         binding.quantityRed.setText(qty);
-       //Intent mobilered=getActivity().
-        //String a=this.getArguments().getString("mobilere");
-        //Bundle args=getArguments();
-       String intentmobile=getActivity().getIntent().getStringExtra("mobile");
-        Toast.makeText(getContext(), intentmobile, Toast.LENGTH_SHORT).show();
+
+        icoin = Integer.parseInt(binding.totalPriceMoney.getText().toString());
+
+//        firebaseDatabase = FirebaseDatabase.getInstance();
 
 
 
         quantityRed = Integer.parseInt(binding.quantityRed.getText().toString());
+        mobile = getActivity().getIntent().getStringExtra("mobile");
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Joining Red");
@@ -77,6 +85,8 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
                     int hundred = icoin * quantity;
                     coin = String.valueOf(hundred);
                     binding.totalPriceMoney.setText(coin);
+                } else{
+                    Toast.makeText(getActivity(), "Please Choose a valid amount", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -94,6 +104,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         });
 
         binding.joinRed.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (quantityRed == 0 || icoin == 0){
@@ -111,8 +122,30 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     }
 
     private void joinVerify() {
+        Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
 
-//        waiting for Mobile Number
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                int ivalue = Integer.parseInt(value);
+                int join = ivalue - icoin;
+
+                databaseReference.setValue(join);
+
+                Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(getContext(), "Failed to Join", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
     }
@@ -130,7 +163,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     }
 
     private void decrement() {
-        quantity = quantity > 0 ? --quantity : 0;
+        quantity = quantity > 1 ? --quantity : 1;
         String s = String.valueOf(quantity);
         binding.quantityRed.setText(s);
 

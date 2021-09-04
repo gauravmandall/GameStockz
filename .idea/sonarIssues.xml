@@ -118,6 +118,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/Adapters/MyAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/AuthenticationActivity.java">
           <value>
             <set />
@@ -179,6 +184,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/Fragments/SplashScreenActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/Fragments/WithdrawRequestsFragment.java">
           <value>
             <set />
           </value>
@@ -249,6 +259,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/data/Result.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/gamestockz/data/modals/UserWithdrawRequests.java">
           <value>
             <set />
           </value>
@@ -413,6 +428,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_withdraw_requests.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/item.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml">
           <value>
             <set />
@@ -469,6 +494,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../MyApplication/app/src/main/res/layout/activity_main.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../UserInput_Lesson1/app/src/main/res/layout/activity_main.xml">
           <value>
             <set />
           </value>
@@ -569,6 +599,11 @@
           </value>
         </entry>
         <entry key="$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-30/data/res/anim/slide_out_right.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/Downloads/ludo-master/gradle/wrapper/gradle-wrapper.properties">
           <value>
             <set />
           </value>

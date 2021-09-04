@@ -53,7 +53,6 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputEditText name, mobile, enterOtp, email, pass, confirmPass, refferal;
     private MaterialButton getOtp;
     private TextView countDownTimer;
-    private TextView resendOtp;
     private Button signup;
 
     //    Integer wallet = 0;
@@ -112,7 +111,6 @@ public class SignupActivity extends AppCompatActivity {
 
         getOtp = findViewById(R.id.sendOTP);
         countDownTimer = findViewById(R.id.countdownTimer);
-        resendOtp = findViewById(R.id.resend_otp);
 
         signup = findViewById(R.id.signup);
 
@@ -234,35 +232,57 @@ public class SignupActivity extends AppCompatActivity {
     //    When clicks on Signup Button to become a member of the application
     private void signupOnClick() {
 
+        nameLt.setError(null);
+        mobileLt.setError(null);
+        emailLt.setError(null);
+        passLt.setError(null);
+        confirmPassLt.setError(null);
+        emailLt.setError(null);
+
+
         try {
             if (name.getText().toString().isEmpty()) {
                 nameLt.setError("Required*");
+                pd.dismiss();
 
             }
-            if (!name.getText().toString().matches("[a-zA-Z]+")) {
+            if (!name.getText().toString().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$")) {
                 nameLt.setError("Allow only Characters");
+                pd.dismiss();
             }
             if (mobile.getText().toString().isEmpty()) {
                 mobileLt.setError("Required*");
+                pd.dismiss();
 
             }
             if (email.getText().toString().isEmpty()) {
                 emailLt.setError("Required*");
+                pd.dismiss();
+
+            } if (!email.getText().toString().matches("^(.+)@(.+)$")){
+                emailLt.setError("Enter a valid email");
+                pd.dismiss();
             }
             if (enterOtp.getText().toString().isEmpty()) {
                 enterOtpLt.setError("Required*");
+                pd.dismiss();
 
             }
             if (pass.getText().toString().isEmpty() || pass.getText().toString().length() < 6) {
                 passLt.setError("Atleast 8 Characters");
+                pd.dismiss();
             }
-            if (confirmPass.getText().toString().isEmpty() || confirmPass.getText().toString().equals(pass)) {
+            if (confirmPass.getText().toString().isEmpty()) {
                 confirmPassLt.setError("Not valid");
+                pd.dismiss();
+
+            } if (!confirmPass.getText().toString().equals(pass.getText().toString())){
+                confirmPassLt.setError("Not Matched");
+                passLt.setError("Not Matched");
+                pd.dismiss();
 
             } else {
 
-
-                // Registerdialog.show();
                 pd.show();
                 pd.setCanceledOnTouchOutside(false);
 
@@ -309,7 +329,7 @@ public class SignupActivity extends AppCompatActivity {
                                         Toast.makeText(SignupActivity.this, "Mobile Number already Registered ", Toast.LENGTH_SHORT).show();
                                     } else {
                                         if (pass.getText().toString().length() < 6) {
-                                            pass.setError("Password is too short");
+                                            passLt.setError("Password is too short");
                                         } else {
 
                                             // !Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
@@ -418,6 +438,7 @@ public class SignupActivity extends AppCompatActivity {
             progressDialog.dismiss();
             Toast.makeText(SignupActivity.this, "Sent", Toast.LENGTH_SHORT).show();
             countDownTimer.setVisibility(View.VISIBLE);
+            getOtp.setVisibility(View.INVISIBLE);
 
             new CountDownTimer(60000, 1000) {
 
@@ -428,7 +449,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    resendOtp.setVisibility(View.VISIBLE);
+                    getOtp.setText("Resend");
+                    getOtp.setVisibility(View.VISIBLE);
                     countDownTimer.setVisibility(View.INVISIBLE);
                 }
             }.start();

@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
+import com.gamestockz.Fragments.BottomRedFragment;
+import com.gamestockz.Fragments.WithdrawRequestsFragment;
 import com.gamestockz.R;
 import com.gamestockz.databinding.ActivityWithdrawBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,7 +47,6 @@ public class WithdrawActivity extends AppCompatActivity {
     String currentDateandTime;
 
     public static String wallet;
-    //    public static String mobile;
     String s;
 
 
@@ -64,7 +65,6 @@ public class WithdrawActivity extends AppCompatActivity {
         binding.remainBalance.setText(availBal);
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-
         progressDialog = new ProgressDialog(WithdrawActivity.this);
         progressDialog.setTitle("Withdrawal process");
         progressDialog.setMessage("We are sending Request");
@@ -74,29 +74,22 @@ public class WithdrawActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 withdrawOnClick();
-            }
-        });
-        sendDataToRealTimeDatabase();
-
-
-    }
-
-    private void sendDataToRealTimeDatabase() {
-        String mobile = getIntent().getStringExtra("mobilewithdraw");
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                wallet = snapshot.getValue(String.class);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+
+        binding.requests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                WithdrawRequestsFragment withdrawRequestsFragment = new WithdrawRequestsFragment();
+                withdrawRequestsFragment.show(getSupportFragmentManager(), withdrawRequestsFragment.getTag());
+
+            }
+        });
+
+
     }
 
     private void withdrawOnClick() {
@@ -199,16 +192,27 @@ public class WithdrawActivity extends AppCompatActivity {
         withdrawRequests.put("Ifsc Code", Ifsc);
         withdrawRequests.put("Amount", Amount);
         withdrawRequests.put("Status", Status);
+        withdrawRequests.put("Date", currentDateandTime);
 
         documentReference.set(withdrawRequests).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
-                reference.setValue(s);
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        reference.setValue(s);
 
-                Toast.makeText(WithdrawActivity.this, "Withdraw Request Proceed", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                        Toast.makeText(WithdrawActivity.this, "Withdraw Request Proceed", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
             }

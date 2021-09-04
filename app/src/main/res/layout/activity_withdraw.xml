@@ -87,13 +87,14 @@
                 app:layout_constraintVertical_bias="0" />
 
             <TextView
+                android:id="@+id/requests"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:drawableStart="@drawable/ic_history"
                 android:drawableTint="@color/white"
                 android:fontFamily="@font/aclonica"
-                android:text="Transaction history"
+                android:text="Your Requests"
                 android:textColor="@color/white"
                 android:layout_marginBottom="20dp"
                 android:textSize="22sp"

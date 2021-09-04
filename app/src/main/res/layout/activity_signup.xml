@@ -179,26 +179,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/fullname"
                     app:layout_constraintVertical_bias="0.253" />
 
-                <TextView
-                    android:id="@+id/resend_otp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="@string/resendOtp"
-                    android:textAllCaps="true"
-                    android:textColor="@color/pink500"
-                    android:textSize="16sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/enter_otp"
-                    app:layout_constraintEnd_toEndOf="@+id/countdownTimer"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toEndOf="@+id/enter_otp"
-                    app:layout_constraintTop_toBottomOf="@+id/countdownTimer"
-                    app:layout_constraintVertical_bias=".6"
-                    tools:ignore="SmallSp" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/enter_otp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

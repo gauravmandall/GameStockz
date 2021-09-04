@@ -11,5 +11,15 @@ X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-g
-7app/src/main/java/com/gamestockz/data/modals/Users.java,8\3\83130740aa76ab7430149c0d5b7e5d3f934a58dd
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+u
+Eapp/src/main/java/com/gamestockz/Activities/SplashScreenActivity.java,0\c\0cfb2cb7071b62dbd9802534cd237d76b60ad82e
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+r
+Bapp/src/main/java/com/gamestockz/Activities/DashboardActivity.java,b\7\b7753953c4584efcc12973fe25f1800d00ed6e68
+s
+Capp/src/main/java/com/gamestockz/Activities/OnRechargeActivity.java,9\b\9be8e0c361070f8e77811b005694968fdd0f9cba
+`
+0app/src/main/java/com/gamestockz/Connection.java,f\8\f813772528b8e6dc5c5231a03d1031a6b27a157a

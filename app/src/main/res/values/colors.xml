@@ -18,6 +18,7 @@
     <color name="purple500">#E040FB</color>
     <color name="purple800">#6A1B9A</color>
     <color name="yellow500">#FFFF00</color>
+    <color name="orange">#FFAA00</color>
 
 <!--    Login page Colors -->
     <color name="pink_a100">#FF80AB</color>
