@@ -144,6 +144,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
                     Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 
+
                 }
             }
 
