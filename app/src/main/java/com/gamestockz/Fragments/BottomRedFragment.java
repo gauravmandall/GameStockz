@@ -36,12 +36,12 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
 //    DatabaseReference price;
 
     int quantity = 1;
-    int quantityRed;
     String coin;
-    int icoin;
+    int icoin = 0;
     String mobile;
 
-
+    int ivalue;
+    int tcmoney;
 
 
     @Override
@@ -51,13 +51,6 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         String qty = String.valueOf(quantity);
         binding.quantityRed.setText(qty);
 
-        icoin = Integer.parseInt(binding.totalPriceMoney.getText().toString());
-
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-
-
-
-        quantityRed = Integer.parseInt(binding.quantityRed.getText().toString());
         mobile = getActivity().getIntent().getStringExtra("mobile");
 
         progressDialog = new ProgressDialog(getActivity());
@@ -86,7 +79,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
                     int hundred = icoin * quantity;
                     coin = String.valueOf(hundred);
                     binding.totalPriceMoney.setText(coin);
-                } else{
+                } else {
                     Toast.makeText(getActivity(), "Please Choose a valid amount", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -108,10 +101,11 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
 
             @Override
             public void onClick(View v) {
-                if (quantityRed == 0 || icoin == 0){
+                tcmoney = Integer.parseInt(binding.totalPriceMoney.getText().toString());
+                if (tcmoney == 0 || icoin == 0) {
                     Toast.makeText(getActivity(), "Please choose Correct Values", Toast.LENGTH_SHORT).show();
 
-                }else{
+                } else {
                     progressDialog.show();
                     progressDialog.setCanceledOnTouchOutside(false);
                     joinVerify();
@@ -130,10 +124,9 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                int ivalue = Integer.parseInt(value);
-                int tcmoney = Integer.parseInt(binding.totalPriceMoney.getText().toString());
+                ivalue = Integer.parseInt(value);
 
-                if (tcmoney > ivalue){
+                if (tcmoney > ivalue) {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(), "Insufficient Funds", Toast.LENGTH_LONG).show();
                 } else {
