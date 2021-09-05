@@ -131,20 +131,24 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
                 int ivalue = Integer.parseInt(value);
-                int join = ivalue - icoin;
+                int tcmoney = Integer.parseInt(binding.totalPriceMoney.getText().toString());
 
-                databaseReference.setValue(join);
+                if (tcmoney > ivalue){
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "Insufficient Funds", Toast.LENGTH_LONG).show();
+                } else {
+                    int ijoin = ivalue - tcmoney;
+                    String join = String.valueOf(ijoin);
 
-                Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                    databaseReference.setValue(join);
+                    Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
-                Toast.makeText(getContext(), "Failed to Join", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -157,7 +161,6 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         binding.quantityRed.setText(s);
 
         int calc = icoin * quantity;
-
         coin = String.valueOf(calc);
         binding.totalPriceMoney.setText(coin);
 
