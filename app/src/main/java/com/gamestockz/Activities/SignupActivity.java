@@ -318,12 +318,12 @@ public class SignupActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                     if (snapshot.exists()) {
-                                        // Registerdialog.dismiss();
-
                                         Toast.makeText(SignupActivity.this, "Mobile Number already Registered ", Toast.LENGTH_SHORT).show();
+                                        pd.dismiss();
                                     } else {
                                         if (pass.getText().toString().length() < 6) {
                                             passLt.setError("Password is too short");
+                                            pd.dismiss();
                                         } else {
 
                                             // !Users users = new Users(name.getText().toString(), pass.getText().toString(), mobile.getText().toString()
@@ -334,6 +334,7 @@ public class SignupActivity extends AppCompatActivity {
                                             Task<String> taskData = callcloudfunction();
                                             //!database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
                                             Toast.makeText(SignupActivity.this, "Account created Successfully", Toast.LENGTH_SHORT).show();
+                                            pd.dismiss();
                                             // Registerdialog.dismiss();
                                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                             startActivity(intent);
