@@ -245,38 +245,32 @@ public class SignupActivity extends AppCompatActivity {
                 nameLt.setError("Required*");
                 pd.dismiss();
 
-            }
-            if (!name.getText().toString().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$")) {
+            } else if (!name.getText().toString().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$")) {
                 nameLt.setError("Allow only Characters");
                 pd.dismiss();
-            }
-            if (mobile.getText().toString().isEmpty()) {
+            } else if (mobile.getText().toString().isEmpty()) {
                 mobileLt.setError("Required*");
                 pd.dismiss();
 
-            }
-            if (email.getText().toString().isEmpty()) {
+            } else if (email.getText().toString().isEmpty()) {
                 emailLt.setError("Required*");
                 pd.dismiss();
 
-            } if (!email.getText().toString().matches("^(.+)@(.+)$")){
+            } else if (!email.getText().toString().matches("^(.+)@(.+)$")) {
                 emailLt.setError("Enter a valid email");
                 pd.dismiss();
-            }
-            if (enterOtp.getText().toString().isEmpty()) {
+            } else if (enterOtp.getText().toString().isEmpty()) {
                 enterOtpLt.setError("Required*");
                 pd.dismiss();
 
-            }
-            if (pass.getText().toString().isEmpty() || pass.getText().toString().length() < 6) {
+            } else if (pass.getText().toString().isEmpty() || pass.getText().toString().length() < 6) {
                 passLt.setError("Atleast 8 Characters");
                 pd.dismiss();
-            }
-            if (confirmPass.getText().toString().isEmpty()) {
+            } else if (confirmPass.getText().toString().isEmpty()) {
                 confirmPassLt.setError("Not valid");
                 pd.dismiss();
 
-            } if (!confirmPass.getText().toString().equals(pass.getText().toString())){
+            } else if (!confirmPass.getText().toString().equals(pass.getText().toString())) {
                 confirmPassLt.setError("Not Matched");
                 passLt.setError("Not Matched");
                 pd.dismiss();
@@ -337,7 +331,6 @@ public class SignupActivity extends AppCompatActivity {
                                             // String id = task.getResult().getUser().getUid();
 
 
-
                                             Task<String> taskData = callcloudfunction();
                                             //!database.getReference().child("Users").child(mobile.getText().toString()).setValue(users);
                                             Toast.makeText(SignupActivity.this, "Account created Successfully", Toast.LENGTH_SHORT).show();
@@ -361,13 +354,13 @@ public class SignupActivity extends AppCompatActivity {
                                     data.put("mobile", mobile.getText().toString());
                                     data.put("email", email.getText().toString());
 
-                                    String refmobile=mobile.getText().toString().substring(5,10);
+                                    String refmobile = mobile.getText().toString().substring(5, 10);
 
-                                    String b=name.getText().toString().substring(3,1);
-                                    String myreferralco=b.concat(refmobile);
+                                    String b = name.getText().toString().substring(1, 3);
+                                    String myreferralco = b.concat(refmobile);
 
-                                    data.put("referral",myreferralco);
-                                    data.put("promotioncode",refferal.getText().toString());
+                                    data.put("referral", myreferralco);
+                                    data.put("promotioncode", refferal.getText().toString());
                                     data.put("push", true);
                                     return mFunctions
                                             .getHttpsCallable("function1")
@@ -389,15 +382,6 @@ public class SignupActivity extends AppCompatActivity {
 
                                 }
                             });
-
-
-
-
-
-
-
-
-
 
 
                         } else {
