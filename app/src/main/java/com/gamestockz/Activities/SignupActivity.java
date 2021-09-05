@@ -363,7 +363,7 @@ public class SignupActivity extends AppCompatActivity {
 
                                     String refmobile=mobile.getText().toString().substring(5,10);
 
-                                    String b=name.getText().toString();
+                                    String b=name.getText().toString().substring(3,1);
                                     String myreferralco=b.concat(refmobile);
 
                                     data.put("referral",myreferralco);
