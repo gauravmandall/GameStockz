@@ -111,6 +111,7 @@ public class GameSectionFragment extends Fragment {
                 // Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
                 BottomRedFragment bottomRedFragment=new BottomRedFragment();
                 bottomRedFragment.show(getChildFragmentManager(),bottomRedFragment.getTag());
+                //bottomRedFragment.dismiss();
 
             }
         });

@@ -39,6 +39,8 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     int quantityRed;
     String coin;
     int icoin;
+    public  static  Boolean isjoined=true;
+
     String mobile;
 
 
@@ -74,6 +76,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
                     int ten = icoin * quantity;
                     coin = String.valueOf(ten);
                     binding.totalPriceMoney.setText(coin);
+
                 } else if (group.getCheckedButtonId() == R.id.btn2) {
 
                     icoin = 50;
@@ -114,7 +117,13 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
                 }else{
                     progressDialog.show();
                     progressDialog.setCanceledOnTouchOutside(false);
+                    isjoined=true;
+
                     joinVerify();
+                   // getActivity().finish();
+
+
+
                 }
             }
         });
@@ -125,24 +134,34 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     private void joinVerify() {
         Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+        databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
-                int ivalue = Integer.parseInt(value);
+                String value1 = snapshot.getValue(String.class);
+                int ivalue = Integer.parseInt(value1);
                 int tcmoney = Integer.parseInt(binding.totalPriceMoney.getText().toString());
 
                 if (tcmoney > ivalue){
                     progressDialog.dismiss();
                     Toast.makeText(getContext(), "Insufficient Funds", Toast.LENGTH_LONG).show();
                 } else {
-                    int ijoin = ivalue - tcmoney;
-                    String join = String.valueOf(ijoin);
+                    if(isjoined) {
+                        int ijoin = ivalue - tcmoney;
+                        String join = String.valueOf(ijoin);
 
-                    databaseReference.setValue(join);
-                    Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                        databaseReference1.setValue(join);
+                        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
+                        databaseReference2.setValue("1");
+                        DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("price");
+                        databaseReference3.setValue(String.valueOf(tcmoney));
+
+
+
+                        Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        isjoined = false;
+                    }
 
 
                 }
