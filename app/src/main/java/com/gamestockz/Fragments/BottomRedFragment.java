@@ -177,6 +177,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
 
     private void increment() {
         quantity++;
+        //hele
         String s = String.valueOf(quantity);
         binding.quantityRed.setText(s);
 
