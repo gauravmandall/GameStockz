@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ public class GameSectionFragment extends Fragment {
     MaterialButton red,green;
     private  TextView walletshow;
     ListView listview;
+    public static String yesno;
 
     TextView period,time;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
@@ -102,16 +104,40 @@ public class GameSectionFragment extends Fragment {
         });
         red = v.findViewById(R.id.redBtn);
         green=v.findViewById(R.id.greenBtn);
+
+
         //blue=v.findViewById(R.id.blue_button);
 
         //time=v.findViewById(R.id.time);
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
-                BottomRedFragment bottomRedFragment=new BottomRedFragment();
-                bottomRedFragment.show(getChildFragmentManager(),bottomRedFragment.getTag());
-                //bottomRedFragment.dismiss();
+
+
+                DatabaseReference predict1=FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
+                predict1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        yesno=snapshot.getValue(String.class);
+                        Toast.makeText(getActivity(), ""+yesno, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                if(yesno=="1"){
+                    Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    // Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
+                    BottomRedFragment bottomRedFragment = new BottomRedFragment();
+                    bottomRedFragment.show(getChildFragmentManager(), bottomRedFragment.getTag());
+                    //bottomRedFragment.dismiss();
+                }
 
             }
         });

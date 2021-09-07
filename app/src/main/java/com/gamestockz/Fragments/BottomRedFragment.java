@@ -39,7 +39,10 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     int quantityRed;
     String coin;
     int icoin;
+
     public  static  Boolean isjoined=true;
+    public static String yesno;
+    public  static Integer a;
 
     String mobile;
 
@@ -107,24 +110,50 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
             }
         });
 
+
         binding.joinRed.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                DatabaseReference predict1=FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
+                predict1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        yesno=snapshot.getValue(String.class);
+                        a=Integer.parseInt(yesno);
+                       // Toast.makeText(getActivity(), "dfdfd"+yesno, Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 if (quantityRed == 0 || icoin == 0){
                     Toast.makeText(getActivity(), "Please choose Correct Values", Toast.LENGTH_SHORT).show();
+                    isjoined=false;
+                   // progressDialog.dismiss();
 
                 }else{
                     progressDialog.show();
                     progressDialog.setCanceledOnTouchOutside(false);
                     isjoined=true;
 
+                    if(a==1 || a==2){
+                        Toast.makeText(getContext(), "You Have Already Joined"+ yesno, Toast.LENGTH_SHORT).show();
+                        isjoined=false;
+                        //getActivity().finish();
+                        progressDialog.dismiss();
+                    }
+                    else{
                     joinVerify();
                     // getActivity().finish();
 
 
 
-                }
+                }}
             }
         });
 
@@ -132,7 +161,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     }
 
     private void joinVerify() {
-        Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
 
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
         databaseReference1.addValueEventListener(new ValueEventListener() {
