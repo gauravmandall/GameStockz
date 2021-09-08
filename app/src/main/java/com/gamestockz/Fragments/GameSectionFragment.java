@@ -176,7 +176,7 @@ public class GameSectionFragment extends Fragment {
         if (itime > 10) {
 
             red.setBackgroundColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.red_a700));
-            green.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.green_A700));
+            green.setBackgroundColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.green_A700));
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
             reference.addValueEventListener(new ValueEventListener() {
