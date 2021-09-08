@@ -51,8 +51,8 @@ public class GameSectionFragment extends Fragment {
         walletshow=v.findViewById(R.id.walletshow);
         String mobile=getActivity().getIntent().getStringExtra("mobile");
         ArrayList<String> arrayList=new ArrayList<>();
-
-
+        BottomRedFragment bottomRedFragment = new BottomRedFragment();
+        BottomGreenFragment bottomGreenFragment=new BottomGreenFragment();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");
@@ -80,7 +80,8 @@ public class GameSectionFragment extends Fragment {
                 String a = snapshot.getValue(String.class);
                 time.setText(a);
                 int itime = Integer.parseInt(a);
-                verifyClicked(mobile, itime);
+
+                verifyClicked(mobile, itime, bottomRedFragment, bottomGreenFragment);
 
 
             }
@@ -118,60 +119,15 @@ public class GameSectionFragment extends Fragment {
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String predict = snapshot.getValue(String.class);
-                        int ipredict = Integer.parseInt(predict);
-                        
-                        if (ipredict == 0){
-                            BottomRedFragment bottomRedFragment = new BottomRedFragment();
-                            bottomRedFragment.show(getChildFragmentManager(), bottomRedFragment.getTag());
-                            
-                        } else {
-                            Toast.makeText(getActivity(), "You are already Joined", Toast.LENGTH_SHORT).show();
-                        }
-                        
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
+                bottomRedFragment.show(getChildFragmentManager(), bottomRedFragment.getTag());
             }
         });
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String predict = snapshot.getValue(String.class);
-                        int ipredict = Integer.parseInt(predict);
-                        
-                        if (ipredict == 0){
 
-                            BottomGreenFragment bottomGreenFragment=new BottomGreenFragment();
-                            bottomGreenFragment.show(getChildFragmentManager(),bottomGreenFragment.getTag());
-                        } else {
-                            Toast.makeText(getActivity(), "You are already Joined", Toast.LENGTH_SHORT).show();
-                        }
-                        
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-                
-                
-                
+                bottomGreenFragment.show(getChildFragmentManager(),bottomGreenFragment.getTag());
             }
         });
        
@@ -213,7 +169,7 @@ public class GameSectionFragment extends Fragment {
         return v;
     }
 
-    private void verifyClicked(String mobile, int itime) {
+    private void verifyClicked(String mobile, int itime, BottomRedFragment bottomRedFragment, BottomGreenFragment bottomGreenFragment) {
 
 
         if (itime > 10) {
@@ -231,8 +187,6 @@ public class GameSectionFragment extends Fragment {
 
 
                     } else {
-                        red.setBackgroundColor(Color.GRAY);
-                        green.setBackgroundColor(Color.GRAY);
                         red.setEnabled(false);
                         green.setEnabled(false);
 

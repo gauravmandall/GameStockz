@@ -11,10 +11,10 @@ public class Connection  extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (isConnected(context)){
-            Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Connected", Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(context, "No Internet!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No Internet! \nplease check your connection!", Toast.LENGTH_LONG).show();
         }
 
     }
