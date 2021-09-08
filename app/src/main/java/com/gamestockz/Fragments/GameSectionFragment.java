@@ -2,6 +2,7 @@ package com.gamestockz.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,9 @@ public class GameSectionFragment extends Fragment {
 
             }
 
+
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -75,10 +79,12 @@ public class GameSectionFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String a = snapshot.getValue(String.class);
                 time.setText(a);
-//
+                int itime = Integer.parseInt(a);
+                verifyClicked(mobile, itime);
 
 
             }
+
 
 
             @Override
@@ -112,15 +118,21 @@ public class GameSectionFragment extends Fragment {
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                DatabaseReference predict1=FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
-                predict1.addValueEventListener(new ValueEventListener() {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
+                reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        yesno=snapshot.getValue(String.class);
-                        Toast.makeText(getActivity(), ""+yesno, Toast.LENGTH_SHORT).show();
-
+                        String predict = snapshot.getValue(String.class);
+                        int ipredict = Integer.parseInt(predict);
+                        
+                        if (ipredict == 0){
+                            BottomRedFragment bottomRedFragment = new BottomRedFragment();
+                            bottomRedFragment.show(getChildFragmentManager(), bottomRedFragment.getTag());
+                            
+                        } else {
+                            Toast.makeText(getActivity(), "You are already Joined", Toast.LENGTH_SHORT).show();
+                        }
+                        
                     }
 
                     @Override
@@ -128,24 +140,38 @@ public class GameSectionFragment extends Fragment {
 
                     }
                 });
-                if(yesno=="1"){
-                    Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
-                }
-                else {
 
-                    // Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
-                    BottomRedFragment bottomRedFragment = new BottomRedFragment();
-                    bottomRedFragment.show(getChildFragmentManager(), bottomRedFragment.getTag());
-                    //bottomRedFragment.dismiss();
-                }
 
             }
         });
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomGreenFragment bottomGreenFragment=new BottomGreenFragment();
-                bottomGreenFragment.show(getChildFragmentManager(),bottomGreenFragment.getTag());
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String predict = snapshot.getValue(String.class);
+                        int ipredict = Integer.parseInt(predict);
+                        
+                        if (ipredict == 0){
+
+                            BottomGreenFragment bottomGreenFragment=new BottomGreenFragment();
+                            bottomGreenFragment.show(getChildFragmentManager(),bottomGreenFragment.getTag());
+                        } else {
+                            Toast.makeText(getActivity(), "You are already Joined", Toast.LENGTH_SHORT).show();
+                        }
+                        
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                
+                
+                
             }
         });
        
@@ -181,6 +207,60 @@ public class GameSectionFragment extends Fragment {
 
             }
         });
+
+        verifyJoined();
+
         return v;
+    }
+
+    private void verifyClicked(String mobile, int itime) {
+
+
+        if (itime > 10) {
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String predictDb = snapshot.getValue(String.class);
+                    int ipredictDb = Integer.parseInt(String.valueOf(predictDb));
+
+                    if (ipredictDb == 0) {
+                        red.setEnabled(true);
+                        green.setEnabled(true);
+
+
+                    } else {
+                        red.setBackgroundColor(Color.GRAY);
+                        green.setBackgroundColor(Color.GRAY);
+                        red.setEnabled(false);
+                        green.setEnabled(false);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        } else {
+
+            red.setEnabled(false);
+            green.setEnabled(false);
+
+            red.setBackgroundColor(Color.GRAY);
+            green.setBackgroundColor(Color.GRAY);
+
+        }
+
+
+
+    }
+
+    private void verifyJoined() {
+
+
     }
 }

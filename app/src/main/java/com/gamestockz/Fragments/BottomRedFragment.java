@@ -16,14 +16,23 @@ import com.gamestockz.Activities.WithdrawActivity;
 import com.gamestockz.R;
 import com.gamestockz.databinding.FragmentBottomRedBinding;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.SplittableRandom;
 
 public class BottomRedFragment extends BottomSheetDialogFragment {
@@ -31,43 +40,85 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     FragmentBottomRedBinding binding;
     ProgressDialog progressDialog;
 
+
 //    FirebaseDatabase firebaseDatabase;
 //    DatabaseReference databaseReference;
 //    DatabaseReference price;
+
+    //    FirebaseFirestore firebaseFirestore;
+    private FirebaseFirestore firebaseFirestore;
+
+    private SimpleDateFormat simpleDateFormat;
+    private String currentDateandTime;
 
     int quantity = 1;
     int quantityRed;
     String coin;
     int icoin;
-
-    public  static  Boolean isjoined=true;
-    public static String yesno;
-    public  static Integer a;
+    public static Boolean isjoined = true;
 
     String mobile;
-
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentBottomRedBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        initElements();
+
+        toggleButtonConditions();
+
+        binding.subtractRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                decrement();
+            }
+        });
+        binding.addRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                increment();
+            }
+        });
+        binding.joinRed.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (quantityRed == 0 || icoin == 0) {
+                    Toast.makeText(getActivity(), "Please choose Correct Values", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    progressDialog.show();
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    isjoined = true;
+
+                    storeDataToRealtimeDatabase();
+
+
+                }
+            }
+        });
+
+        return view;
+    }
+
+
+    private void initElements() {
+
         String qty = String.valueOf(quantity);
         binding.quantityRed.setText(qty);
-
         icoin = Integer.parseInt(binding.totalPriceMoney.getText().toString());
-
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-
-
-
         quantityRed = Integer.parseInt(binding.quantityRed.getText().toString());
         mobile = getActivity().getIntent().getStringExtra("mobile");
-
+        firebaseFirestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Joining Red");
         progressDialog.setMessage("Please Wait");
+
+    }
+
+    private void toggleButtonConditions() {
 
         binding.toggleButton.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
@@ -92,104 +143,75 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
                     int hundred = icoin * quantity;
                     coin = String.valueOf(hundred);
                     binding.totalPriceMoney.setText(coin);
-                } else{
+                } else {
                     Toast.makeText(getActivity(), "Please Choose a valid amount", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        binding.subtractRed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                decrement();
-            }
-        });
-        binding.addRed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                increment();
-            }
-        });
 
-
-        binding.joinRed.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                DatabaseReference predict1=FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
-                predict1.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        yesno=snapshot.getValue(String.class);
-                        a=Integer.parseInt(yesno);
-                       // Toast.makeText(getActivity(), "dfdfd"+yesno, Toast.LENGTH_SHORT).show();
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-                if (quantityRed == 0 || icoin == 0){
-                    Toast.makeText(getActivity(), "Please choose Correct Values", Toast.LENGTH_SHORT).show();
-                    isjoined=false;
-                   // progressDialog.dismiss();
-
-                }else{
-                    progressDialog.show();
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    isjoined=true;
-
-                    if(a==1 || a==2){
-                        Toast.makeText(getContext(), "You Have Already Joined"+ yesno, Toast.LENGTH_SHORT).show();
-                        isjoined=false;
-                        //getActivity().finish();
-                        progressDialog.dismiss();
-                    }
-                    else{
-                    joinVerify();
-                    // getActivity().finish();
-
-
-
-                }}
-            }
-        });
-
-        return view;
     }
 
-    private void joinVerify() {
-        //Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
-
-        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
-        databaseReference1.addValueEventListener(new ValueEventListener() {
+    private void storeDataToRealtimeDatabase() {
+        Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value1 = snapshot.getValue(String.class);
                 int ivalue = Integer.parseInt(value1);
                 int tcmoney = Integer.parseInt(binding.totalPriceMoney.getText().toString());
 
-                if (tcmoney > ivalue){
+                if (tcmoney > ivalue) {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(), "Insufficient Funds", Toast.LENGTH_LONG).show();
                 } else {
-                    if(isjoined) {
+                    if (isjoined) {
                         int ijoin = ivalue - tcmoney;
                         String join = String.valueOf(ijoin);
 
-                        databaseReference1.setValue(join);
-                        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict");
-                        databaseReference2.setValue("1");
-                        DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("price");
-                        databaseReference3.setValue(String.valueOf(tcmoney));
+                        databaseReference.setValue(join);
+                        Task<Void> reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("predict").setValue("1");
+                        Task<Void> databaseReference2 = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("price").setValue(String.valueOf(tcmoney));
 
+
+//
+                        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+                        currentDateandTime = simpleDateFormat.format(new Date());
+                        DatabaseReference getTime = FirebaseDatabase.getInstance().getReference("Time").child("Time");
+                        getTime.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String time = snapshot.getValue(String.class);
+
+                                DocumentReference documentReference = firebaseFirestore.collection("Users").document(mobile)
+                                        .collection("Play History").document(currentDateandTime);
+
+                                Map<String, Object> playHistory = new HashMap<>();
+                                playHistory.put("predict", "1");
+                                playHistory.put("color", "Red");
+                                playHistory.put("price", String.valueOf(tcmoney));
+                                playHistory.put("wallet", join);
+                                playHistory.put("Time", time);
+                                playHistory.put("Date", currentDateandTime);
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+//
 
 
                         Toast.makeText(getActivity(), "Joined Successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                         isjoined = false;
+
+
+
                     }
 
 
@@ -200,6 +222,20 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+    }
+
+    private void storeDataToCloudFirestore(int tcmoney, String join) {
+
+
+
+//        withdrawRequests.put("Real Name", RealName);
+//        withdrawRequests.put("Account Number", AccountNumber);
+//        withdrawRequests.put("Confirm Account Number", ConfirmAccountNumber);
+//        withdrawRequests.put("Ifsc Code", Ifsc);
+//        withdrawRequests.put("Amount", Amount);
+//        withdrawRequests.put("Status", Status);
+//        withdrawRequests.put("Date", currentDateandTime);
 
 
     }
@@ -225,5 +261,4 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
         binding.totalPriceMoney.setText(coin);
 
     }
-
 }

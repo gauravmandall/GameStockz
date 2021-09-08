@@ -182,8 +182,8 @@ public class WithdrawActivity extends AppCompatActivity {
         String Status = "Pending";
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("Withdraw Requests").document(mobile)
-                .collection("Requests").document(currentDateandTime);
+        DocumentReference documentReference = firebaseFirestore.collection("Users").document(mobile)
+                .collection("Withdraw Requests").document(currentDateandTime);
 
         Map<String, Object> withdrawRequests = new HashMap<>();
         withdrawRequests.put("Real Name", RealName);
