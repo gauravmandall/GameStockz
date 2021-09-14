@@ -46,12 +46,16 @@ public class WithdrawActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     String currentDateandTime;
 
+    SimpleDateFormat formattedSimpleDate;
+    String formattedCurrentDateandTime;
+
     public static String wallet;
     String s;
 
 
     int fenterAmount;
     String availBal;
+
 
 
     @Override
@@ -61,8 +65,23 @@ public class WithdrawActivity extends AppCompatActivity {
         binding = ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        availBal = getIntent().getStringExtra("walletWithdraw");
-        binding.remainBalance.setText(availBal);
+        String mobile = getIntent().getStringExtra("mobilewithdraw");
+
+        DatabaseReference walRef = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
+        walRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                availBal = snapshot.getValue(String.class);
+                binding.remainBalance.setText(availBal);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         progressDialog = new ProgressDialog(WithdrawActivity.this);
@@ -72,7 +91,6 @@ public class WithdrawActivity extends AppCompatActivity {
         binding.withdrawFundsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 withdrawOnClick();
 
             }
@@ -100,8 +118,9 @@ public class WithdrawActivity extends AppCompatActivity {
         binding.ifsc.setError(null);
         binding.amountWithdraw.setError(null);
 
+
         fenterAmount = Integer.parseInt(binding.amountWithdrawEd.getText().toString());
-        int favailBal = Integer.parseInt(availBal);
+        int favailBal = Integer.parseInt(this.availBal);
 
         try {
             if (binding.realNameEd.getText().toString().isEmpty()) {
@@ -151,7 +170,6 @@ public class WithdrawActivity extends AppCompatActivity {
             if (fenterAmount < 31) {
                 binding.amountWithdraw.setError("1. Minimum Withdraw is Rs.31 \n2. Withdraw Charges:\ni)less than 1500\nCharges-Rs.30\nii)Greater than 1500\nCharges-Rs.2%\n3. Withdraw Timing:\ni)Monday to Saturday\nii)10 AM to 5 PM\n");
             } else {
-
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
 
@@ -169,8 +187,13 @@ public class WithdrawActivity extends AppCompatActivity {
 
     private void withdrawVerify() {
 
+
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
         currentDateandTime = simpleDateFormat.format(new Date());
+
+
+        formattedSimpleDate = new SimpleDateFormat("EEE, dd MMM yyyy 'at' hh:mm:ss aaa", Locale.getDefault());
+        formattedCurrentDateandTime = formattedSimpleDate.format(new Date());
 
         String mobile = getIntent().getStringExtra("mobilewithdraw");
 
@@ -179,7 +202,7 @@ public class WithdrawActivity extends AppCompatActivity {
         String ConfirmAccountNumber = binding.cfmAccountNumEd.getText().toString();
         String Ifsc = binding.ifscEd.getText().toString();
         String Amount = binding.amountWithdrawEd.getText().toString();
-        String Status = "Pending";
+        String Status = "PENDING";
 
 
         DocumentReference documentReference = firebaseFirestore.collection("Users").document(mobile)
@@ -192,11 +215,17 @@ public class WithdrawActivity extends AppCompatActivity {
         withdrawRequests.put("Ifsc Code", Ifsc);
         withdrawRequests.put("Amount", Amount);
         withdrawRequests.put("Status", Status);
-        withdrawRequests.put("Date", currentDateandTime);
+        withdrawRequests.put("Date", formattedCurrentDateandTime);
+        withdrawRequests.put("Numeric Date", currentDateandTime);
 
         documentReference.set(withdrawRequests).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+
+                DocumentReference documentReference1 = firebaseFirestore.collection("Withdraw Requests").document(mobile);
+                Map<String, Object> remainRequests = new HashMap<>();
+                remainRequests.put("Mobile", mobile);
+                documentReference1.set(remainRequests);
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
                 reference.addValueEventListener(new ValueEventListener() {
