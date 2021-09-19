@@ -33,6 +33,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../Chatz/app/src/main/res/layout/senderchatlayout.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../FragmentsTutorial/app/src/main/java/com/android/fragmentstutorial/Fragments/FirstFragment.java">
           <value>
             <set />
@@ -293,6 +298,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/glass_horizontal.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/glass_plane.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/glass_vertical.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/gradient.xml">
           <value>
             <set />
@@ -304,6 +324,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/ic_home.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/ic_info.xml">
           <value>
             <set />
           </value>
@@ -389,6 +414,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_withdraw.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/dialog_withdraw_requests.xml">
           <value>
             <set />
           </value>

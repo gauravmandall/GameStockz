@@ -1,5 +1,7 @@
 package com.gamestockz.data.modals;
 
+import android.widget.ImageView;
+
 public class UserWithdrawRequests {
     String Amount, Date, Status;
 

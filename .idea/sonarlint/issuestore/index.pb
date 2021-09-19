@@ -15,8 +15,6 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 u
 Eapp/src/main/java/com/gamestockz/Activities/SplashScreenActivity.java,0\c\0cfb2cb7071b62dbd9802534cd237d76b60ad82e
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 s
 Capp/src/main/java/com/gamestockz/Activities/OnRechargeActivity.java,9\b\9be8e0c361070f8e77811b005694968fdd0f9cba
 g

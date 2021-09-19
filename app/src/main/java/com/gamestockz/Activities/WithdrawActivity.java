@@ -39,6 +39,8 @@ import java.util.Map;
 
 public class WithdrawActivity extends AppCompatActivity {
 
+    WithdrawRequestsFragment fragment;
+
     ActivityWithdrawBinding binding;
     ProgressDialog progressDialog;
     private FirebaseFirestore firebaseFirestore;

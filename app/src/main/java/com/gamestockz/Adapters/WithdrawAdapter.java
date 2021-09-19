@@ -1,6 +1,9 @@
 package com.gamestockz.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +38,23 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull WithdrawAdapter.MyViewHolder holder, int position) {
-
+        String status = userWithdrawRequestsArrayList.get(position).getStatus();
         UserWithdrawRequests userWithdrawRequests = userWithdrawRequestsArrayList.get(position);
 
         holder.Amount.setText(userWithdrawRequests.getAmount());
         holder.Date.setText(userWithdrawRequests.getDate());
-
         holder.Status.setText(userWithdrawRequests.getStatus());
+
+        if (status.equalsIgnoreCase("PENDING")) {
+            holder.Status.setTextColor(Color.parseColor("#ff6600"));
+        } else if (status.equalsIgnoreCase("SUCCESS")) {
+            holder.Status.setTextColor(Color.GREEN);
+        } else if (status.equalsIgnoreCase("FAILED")) {
+            holder.Status.setTextColor(Color.RED);
+        } else if (status.equalsIgnoreCase("FLAGGED")) {
+            holder.Status.setTextColor(Color.parseColor("#6A1B9A"));
+        }
+
 
     }
 
@@ -50,7 +63,7 @@ public class WithdrawAdapter extends RecyclerView.Adapter<WithdrawAdapter.MyView
         return userWithdrawRequestsArrayList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView Amount, Date, Status;
 
