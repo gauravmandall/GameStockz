@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameStockz">
-        <activity android:name=".Activities.WithdrawActivity"></activity>
+        <activity
+            android:name=".Fragments.MyRefferals"
+            android:exported="true" />
+        <activity android:name=".Activities.WithdrawActivity" />
         <activity android:name=".Activities.OnRechargeActivity" />
         <activity android:name=".Activities.ForgetPasswordActivity" />
         <activity android:name=".Activities.DashboardActivity" />
