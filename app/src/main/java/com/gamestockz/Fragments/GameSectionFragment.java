@@ -41,6 +41,10 @@ public class GameSectionFragment extends Fragment {
     DatabaseReference period1=database.getReference("period");
     DatabaseReference result;
 
+    public static Boolean isClicked = true;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -122,6 +126,9 @@ public class GameSectionFragment extends Fragment {
             public void onClick(View v) {
 
                 bottomRedFragment.show(getChildFragmentManager(), bottomRedFragment.getTag());
+                isClicked = true;
+
+
             }
         });
         green.setOnClickListener(new View.OnClickListener() {
