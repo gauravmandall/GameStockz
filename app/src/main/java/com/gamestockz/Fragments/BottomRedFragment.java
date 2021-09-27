@@ -124,7 +124,7 @@ public class BottomRedFragment extends BottomSheetDialogFragment {
     }
 
     private void storeDataToRealtimeDatabase() {
-        Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), mobile, Toast.LENGTH_SHORT).show();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(mobile).child("wallet");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
