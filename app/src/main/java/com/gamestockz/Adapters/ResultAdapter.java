@@ -49,7 +49,6 @@ public class ResultAdapter extends RecyclerView.Adapter<com.gamestockz.Adapters.
             holder.result.setCardBackgroundColor(Color.GREEN);
         }
 
-
     }
 
     @Override

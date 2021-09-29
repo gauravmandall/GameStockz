@@ -13,7 +13,6 @@
         android:text="2222446578978"
         android:textSize="22sp"
         android:letterSpacing="0.08"
-        android:textStyle="bold"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

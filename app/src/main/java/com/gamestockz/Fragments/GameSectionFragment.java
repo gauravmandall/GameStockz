@@ -200,7 +200,7 @@ public class GameSectionFragment extends Fragment {
 
     private void FetchResultData() {
 
-        firestore.collection("Results").orderBy("gameId", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firestore.collection("Results").orderBy("numericGameId", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
@@ -213,10 +213,13 @@ public class GameSectionFragment extends Fragment {
 
                 for (DocumentChange dc : value.getDocumentChanges()) {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
-                        gameSectionResults.add(dc.getDocument().toObject(GameSectionResult.class));
+                        gameSectionResults.add(0, dc.getDocument().toObject(GameSectionResult.class));
+                        binding.recyclerView.smoothScrollToPosition(0);
+                        resultAdapter.notifyDataSetChanged();
+
 
                     }
-                    resultAdapter.notifyDataSetChanged();
+
                     if (dialog.isShowing())
                         dialog.dismiss();
                 }

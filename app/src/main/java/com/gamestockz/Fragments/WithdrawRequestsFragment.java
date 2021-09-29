@@ -97,15 +97,11 @@ public class WithdrawRequestsFragment extends BottomSheetDialogFragment {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
 
                         userWithdrawRequests.add(dc.getDocument().toObject(UserWithdrawRequests.class));
-
-                    }
-                    if (dc.getType() == DocumentChange.Type.MODIFIED) {
-
-//                        userWithdrawRequests.get(dc.getDocument().toObject(UserWithdrawRequests.class));
+                        withdrawAdapter.notifyDataSetChanged();
 
                     }
 
-                    withdrawAdapter.notifyDataSetChanged();
+
 
                     if (progressDialog.isShowing())
                         progressDialog.dismiss();
