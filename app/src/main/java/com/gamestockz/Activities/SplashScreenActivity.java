@@ -16,7 +16,7 @@ import com.gamestockz.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN = 1000;
+    private static int SPLASH_SCREEN = 2000;
 
     //    Variables uses in the splash screen
     Animation topAnim, bottomAnim;
@@ -45,30 +45,41 @@ public class SplashScreenActivity extends AppCompatActivity {
         logo.setAnimation(bottomAnim);
         splashSlogan.setAnimation(bottomAnim);
 
-//
 
-        new Handler().postDelayed(() -> {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-             onBoardingScreen = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
-             boolean isFirstTime = onBoardingScreen.getBoolean("firstTime",true);
+                onBoardingScreen = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
+                boolean isFirstTime = onBoardingScreen.getBoolean("firstTime",true);
 
-             if (isFirstTime){
 
-                 SharedPreferences.Editor editor = onBoardingScreen.edit();
-                 editor.putBoolean("firstTime",false);
-                 editor.apply();
+                SharedPreferences preferences = getSharedPreferences(LoginActivity.LOGIN_CHECK, 0);
+                boolean hasLoggedIn = preferences.getBoolean("hasLoggedIn", false);
 
-                 Intent intent = new Intent(SplashScreenActivity.this, OnBoardingActivity.class);
-                 startActivity(intent);
-                 finish();
-             }
-             else {
-                 Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
-                 startActivity(intent);
-                 finish();
-             }
 
-        }, SPLASH_SCREEN);
+                if (isFirstTime){
+
+                    SharedPreferences.Editor editor = onBoardingScreen.edit();
+                    editor.putBoolean("firstTime",false);
+                    editor.apply();
+
+                    Intent intent = new Intent(SplashScreenActivity.this, OnBoardingActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if (hasLoggedIn){
+                    Intent intent = new Intent(SplashScreenActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+        },SPLASH_SCREEN);
 
     }
 

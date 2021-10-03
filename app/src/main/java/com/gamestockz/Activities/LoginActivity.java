@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mauth;
     FirebaseDatabase database;
+
+    public static String LOGIN_CHECK ="MyLoginCheck";
 
 
     @Override
@@ -105,8 +108,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginOnClick() {
 
-//        loginMobileLt.setError(null);
-//        loginPassLt.setError(null);
 
         try {
             progressDialog.show();
@@ -141,25 +142,21 @@ public class LoginActivity extends AppCompatActivity {
                             progressDialog.dismiss();
 
 
+                            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.LOGIN_CHECK, 0);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                            editor.putBoolean("hasLoggedIn", true);
+                            editor.commit();
+
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             intent.putExtra("name", namefromdb);
                             intent.putExtra("wallet", walletfromdb);
                             intent.putExtra("mobile", mobilefromdb);
                             Intent intent1=new Intent(getApplicationContext(),OnRechargeActivity.class);
-
-                            //  Intent intent2=new Intent(getApplicationContext(),SearchFragment.class);
-                            //intent2.putExtra("mobile",mobilefromdb);
-                            //intent.putExtra("mobile", mobilefromdb);
                             startActivity(intent);
-                            //startActivity(intent2);
                             intent1.putExtra("mobile1",mobilefromdb);
+                            finish();
 
-
-                            //startActivity(intent1);
-
-                            //Intent intent3=new Intent(LoginActivity.this,MainActivity.class);
-                            // startActivity(intent3);
                         } else {
                             progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
