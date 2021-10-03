@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 //        For all Clickable Buttons and TextViews
         forgetPass = findViewById(R.id.forgetpass);
         login = findViewById(R.id.login);
-
+           //firebase instance
         database = FirebaseDatabase.getInstance();
 
         progressDialog = new ProgressDialog(LoginActivity.this);
