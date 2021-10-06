@@ -27,7 +27,3 @@ k
 ;app/src/main/java/com/gamestockz/Fragments/MyRefferals.java,c\4\c4804b344b4800a43f07284cd89e5821d92c5b56
 l
 <app/src/main/java/com/gamestockz/Adapters/ResultAdapter.java,a\0\a0243c18245d9910158f807e7849be449bd14e95
-x
-Happ/src/main/java/com/gamestockz/Fragments/WithdrawRequestsFragment.java,7\a\7a2d832781226315f84b745da6c00e1d0ad1a477
-s
-Capp/src/main/java/com/gamestockz/Fragments/GameSectionFragment.java,3\1\317c4b26429a58cc131071a8bae4063506c45408

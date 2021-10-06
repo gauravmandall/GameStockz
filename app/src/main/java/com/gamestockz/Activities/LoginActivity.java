@@ -39,13 +39,16 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
 
 
+    SharedPreferences preferences;
+    private static final String LOGIN_CHECK = "MyLoginCheck";
+    private static final String KEY_MOBILE = "mobile";
+
+
     BroadcastReceiver broadcastReceiver;
     ProgressDialog progressDialog;
 
     FirebaseAuth mauth;
     FirebaseDatabase database;
-
-    public static String LOGIN_CHECK ="MyLoginCheck";
 
 
     @Override
@@ -65,6 +68,13 @@ public class LoginActivity extends AppCompatActivity {
 
         broadcastReceiver = new Connection();
         mauth = FirebaseAuth.getInstance();
+        preferences = getSharedPreferences(LOGIN_CHECK, MODE_PRIVATE);
+
+        String sharedPrefmobile = preferences.getString(KEY_MOBILE, null);
+        if (sharedPrefmobile != null) {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            startActivity(intent);
+        }
 
 //        For all TextInput Layouts
         loginMobileLt = findViewById(R.id.forgetMobile);
@@ -77,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 //        For all Clickable Buttons and TextViews
         forgetPass = findViewById(R.id.forgetpass);
         login = findViewById(R.id.login);
-           //firebase instance
+        //firebase instance
         database = FirebaseDatabase.getInstance();
 
         progressDialog = new ProgressDialog(LoginActivity.this);
@@ -94,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         forgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
                 startActivity(intent);
             }
         });
@@ -142,20 +152,29 @@ public class LoginActivity extends AppCompatActivity {
                             progressDialog.dismiss();
 
 
-                            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.LOGIN_CHECK, 0);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                            editor.putBoolean("hasLoggedIn", true);
-                            editor.commit();
+                            SharedPreferences.Editor editor = preferences.edit();
+
+//                            preferences = getSharedPreferences(LOGIN_CHECK, MODE_PRIVATE);
+
+
+                            editor.putString(KEY_MOBILE, loginMobile.getText().toString());
+                            editor.apply();
 
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                            intent.putExtra("name", namefromdb);
-                            intent.putExtra("wallet", walletfromdb);
-                            intent.putExtra("mobile", mobilefromdb);
-                            Intent intent1=new Intent(getApplicationContext(),OnRechargeActivity.class);
                             startActivity(intent);
-                            intent1.putExtra("mobile1",mobilefromdb);
                             finish();
+
+
+
+
+//                            intent.putExtra("name", namefromdb);
+//                            intent.putExtra("wallet", walletfromdb);
+//                            intent.putExtra("mobile", mobilefromdb);
+//                            Intent intent1=new Intent(getApplicationContext(),OnRechargeActivity.class);
+//                            startActivity(intent);
+//                            intent1.putExtra("mobile1",mobilefromdb);
+//                            finish();
 
                         } else {
                             progressDialog.dismiss();
@@ -214,10 +233,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    protected void unregisternetwork(){
+    protected void unregisternetwork() {
         try {
             unregisterReceiver(broadcastReceiver);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
 
 

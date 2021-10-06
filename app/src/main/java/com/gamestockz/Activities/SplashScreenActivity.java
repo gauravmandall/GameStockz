@@ -54,8 +54,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                 boolean isFirstTime = onBoardingScreen.getBoolean("firstTime",true);
 
 
-                SharedPreferences preferences = getSharedPreferences(LoginActivity.LOGIN_CHECK, 0);
-                boolean hasLoggedIn = preferences.getBoolean("hasLoggedIn", false);
+//                SharedPreferences preferences = getSharedPreferences("LOGIN_CHECK", MODE_PRIVATE);
+//                boolean hasLoggedIn = preferences.getBoolean("hasLoggedIn", false);
 
 
                 if (isFirstTime){
@@ -67,11 +67,10 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(SplashScreenActivity.this, OnBoardingActivity.class);
                     startActivity(intent);
                     finish();
-                }
-                else if (hasLoggedIn){
-                    Intent intent = new Intent(SplashScreenActivity.this, DashboardActivity.class);
-                    startActivity(intent);
-                    finish();
+//                } else if (hasLoggedIn) {
+//                    Intent intent = new Intent(SplashScreenActivity.this, DashboardActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 } else {
                     Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(intent);

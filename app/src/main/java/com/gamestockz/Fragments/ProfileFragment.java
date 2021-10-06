@@ -1,7 +1,10 @@
 package com.gamestockz.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +41,17 @@ public class ProfileFragment extends Fragment {
     String[] options = {"Profile", "setting", "Invite code", "Log out"};
     DatabaseReference reference;
 
+    SharedPreferences preferences;
+    public static final String LOGIN_CHECK = "MyLoginCheck";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+        preferences = this.getActivity().getSharedPreferences(LOGIN_CHECK, Context.MODE_PRIVATE);
 
         nameshow = v.findViewById(R.id.nameShow);
         balance = v.findViewById(R.id.balance);
@@ -63,22 +72,24 @@ public class ProfileFragment extends Fragment {
         listView.setAdapter(arrayAdapter);
 
 
-        Intent intent = getActivity().getIntent();
-        String name = intent.getStringExtra("name");
-        String wallet = intent.getStringExtra("wallet");
-        String mobile = intent.getStringExtra("mobile");
-        // name=intent.getStringExtra("name");
-        nameshow.setText(name);
-        balance.setText(wallet);
+        String mobile = this.getArguments().getString("mobile");
         mobiledb.setText(mobile);
-//        withdraw.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent4=new Intent(getActivity(), WithdrawActivity.class);
-//                startActivity(intent4);
-//            }
-//        });
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference refName = database.getReference("Users").child(mobile).child("Name");
+        refName.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String usrName = snapshot.getValue(String.class);
+                nameshow.setText(usrName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         DatabaseReference myRef = database.getReference("Users").child(mobile).child("wallet");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -129,7 +140,7 @@ public class ProfileFragment extends Fragment {
                                     Intent intent = new Intent(getActivity(), WithdrawActivity.class);
                                     intent.putExtra("mobilewithdraw", mobile);
                                     intent.putExtra("walletWithdraw", walletWithdraw);
-                                            startActivity(intent);
+                                    startActivity(intent);
 
 
                                 } else {
@@ -153,9 +164,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), "" + id, Toast.LENGTH_SHORT).show();
-                if(id==5){
-                    Intent intentlog=new Intent(getContext(),LoginActivity.class);
-                    startActivity(intentlog);
+                if (id == 5) {
+
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    Toast.makeText(getActivity(), "Log out Successfully", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+
                 }
 
             }

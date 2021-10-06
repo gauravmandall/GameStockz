@@ -2,8 +2,10 @@ package com.gamestockz.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,7 +84,7 @@ public class GameSectionFragment extends Fragment {
 
         time = binding.time;
         walletshow = binding.walletshow;
-        String mobile = getActivity().getIntent().getStringExtra("mobile");
+        String mobile = this.getArguments().getString("mobile");
         ArrayList<String> arrayList = new ArrayList<>();
         BottomRedFragment bottomRedFragment = new BottomRedFragment();
         BottomGreenFragment bottomGreenFragment = new BottomGreenFragment();
@@ -124,7 +126,6 @@ public class GameSectionFragment extends Fragment {
             }
         });
 
-
         period = binding.period;
         period1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -140,11 +141,6 @@ public class GameSectionFragment extends Fragment {
         });
         red = binding.redBtn;
         green = binding.greenBtn;
-
-
-        //blue=v.findViewById(R.id.blue_button);
-
-        //time=v.findViewById(R.id.time);
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,39 +158,6 @@ public class GameSectionFragment extends Fragment {
                 bottomGreenFragment.show(getChildFragmentManager(), bottomGreenFragment.getTag());
             }
         });
-
-//        ArrayAdapter<String> myArrayadap = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
-//        result = FirebaseDatabase.getInstance().getReference("Result");
-//        result.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                String value = snapshot.getValue(String.class);
-//                arrayList.add(value);
-//                myArrayadap.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                myArrayadap.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
         return view;
     }
 
@@ -247,12 +210,9 @@ public class GameSectionFragment extends Fragment {
                     if (ipredictDb == 0) {
                         red.setEnabled(true);
                         green.setEnabled(true);
-
-
                     } else {
                         red.setEnabled(false);
                         green.setEnabled(false);
-
                     }
                 }
 
@@ -271,7 +231,5 @@ public class GameSectionFragment extends Fragment {
             green.setBackgroundColor(Color.GRAY);
 
         }
-
-
     }
 }

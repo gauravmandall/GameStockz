@@ -1,6 +1,8 @@
 package com.gamestockz.Activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,10 @@ public class DashboardActivity extends AppCompatActivity {
     private MeowBottomNavigation bnv_Main;
     FirebaseAuth auth;
 
+    SharedPreferences preferences;
+    public static final String LOGIN_CHECK = "MyLoginCheck";
+    public static final String KEY_MOBILE = "mobile";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +35,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
     private void initElements(){
+
+        preferences = getSharedPreferences(LOGIN_CHECK, MODE_PRIVATE);
+
         bnv_Main=findViewById(R.id.bnv_Main);
         bnv_Main.add(new MeowBottomNavigation.Model(1,R.drawable.ic_home));
         bnv_Main.add(new MeowBottomNavigation.Model(2,R.drawable.ic_game_stockz));
         bnv_Main.add(new MeowBottomNavigation.Model(3,R.drawable.ic_person));
-        bnv_Main.show(1,true);
-        replace(new MeeshoFragment());
+        bnv_Main.show(2,true);
+        replace(new GameSectionFragment());
         bnv_Main.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
@@ -57,6 +66,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void replace(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("mobile", preferences.getString(KEY_MOBILE, null));
+        fragment.setArguments(bundle);
         transaction.replace(R.id.frags,fragment);
         transaction.commit();
 
